@@ -43,6 +43,7 @@ namespace LivecoinWrapper
         }
 
         #region Public Methods
+
         public async Task<List<Ticker>> GetTickerAsync()
         {
             return await JsonGetAsync<List<Ticker>>(LiveMethod.GetTickers());
@@ -51,6 +52,14 @@ namespace LivecoinWrapper
         public async Task<Ticker> GetTickerAsync(string marketPair)
         {
             return await JsonGetAsync<Ticker>(LiveMethod.GetTicker(marketPair));
+        }
+
+
+        public async Task<List<Trade>> GetLastTradesAsync(string marketPair)
+        {
+            // minOrHour = "true" - данные за последнюю минуту, "false"(по умолчанию) - данные за час
+            // type = "BUY" or "SELL", "false"(по умолчанию)
+            return await JsonGetAsync<List<Trade>>(LiveMethod.GetTradeline(marketPair));
         }
 
         #endregion
