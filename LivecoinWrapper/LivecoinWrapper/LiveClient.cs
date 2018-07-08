@@ -31,7 +31,7 @@ namespace LivecoinWrapper
             httpClient = new HttpClient { BaseAddress = new Uri(baseAddress) };
         }
 
-        protected async Task<T> GetJsonAsync<T>(string requestUri)
+        protected async Task<T> JsonGetAsync<T>(string requestUri)
         {
             var response = await httpClient.GetAsync(requestUri).ConfigureAwait(false);
 
@@ -45,12 +45,12 @@ namespace LivecoinWrapper
         #region Public Methods
         public async Task<List<Ticker>> GetTickerAsync()
         {
-            return await GetJsonAsync<List<Ticker>>(LiveMethod.ExchengeTickers());
+            return await JsonGetAsync<List<Ticker>>(LiveMethod.GetTickers());
         }
 
         public async Task<Ticker> GetTickerAsync(string marketPair)
         {
-            return await GetJsonAsync<Ticker>(LiveMethod.ExchengeTicker(marketPair));
+            return await JsonGetAsync<Ticker>(LiveMethod.GetTicker(marketPair));
         }
 
         #endregion

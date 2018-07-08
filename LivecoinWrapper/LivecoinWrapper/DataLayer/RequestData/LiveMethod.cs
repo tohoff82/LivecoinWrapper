@@ -6,12 +6,12 @@ namespace LivecoinWrapper.DataLayer.RequestData
 {
     public static class LiveMethod
     {
-        public static string ExchengeTickers()
+        public static string GetTickers()
         {
             return "/exchange/ticker";
         }
 
-        public static string ExchengeTicker(string pair)
+        public static string GetTicker(string pair)
         {
             return "/exchange/ticker?currencyPair=" + pair;
         }
