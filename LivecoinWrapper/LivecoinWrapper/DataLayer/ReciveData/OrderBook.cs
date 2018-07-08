@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LivecoinWrapper.DataLayer.ReciveData
 {
-    class OrderBook
+    public class OrderBook
     {
         [JsonProperty(PropertyName = "timestamp")]
         public int Timestamp { get; set; }
