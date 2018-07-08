@@ -7,6 +7,12 @@ namespace LivecoinWrapper.DataLayer.ReciveData
 {
     public class Ticker
     {
+        [JsonProperty(PropertyName = "cur")]
+        public string Currency { get; set; }
+
+        [JsonProperty(PropertyName = "symbol")]
+        public string CurSymbol { get; set; }
+
         [JsonProperty(PropertyName = "last")]
         public decimal LastPrice { get; set; }
 
