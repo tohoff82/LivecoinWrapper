@@ -6,16 +6,12 @@ namespace LivecoinWrapper.DataLayer.RequestData
 {
     public static class LiveMethod
     {
-        public static string GetTickersUri()
+        public static string GetTickerUri(string pair = "allpair")
         {
-            return new StringBuilder("/exchange/ticker").ToString();
-        }
+            var sb = new StringBuilder("/exchange/ticker");
 
-        public static string GetTickerUri(string pair)
-        {
-            var sb = new StringBuilder("/exchange/ticker?");
-
-            return sb.AppendFormat("currencyPair={0}",pair).ToString();
+            if (pair == "allpair") return sb.ToString();
+            else return sb.AppendFormat("?currencyPair={0}",pair).ToString();
         }
         //------------------------------------------------------------------------------------------//
 
@@ -36,6 +32,16 @@ namespace LivecoinWrapper.DataLayer.RequestData
             var sb = new StringBuilder("/exchange/all/order_book");
 
             if (depth < 10) sb.AppendFormat("?depth={0}", depth.ToString());
+
+            return sb.ToString();
+        }
+
+        public static string GetOrderbook(string pair, int depth = 100)
+        {
+            var sb = new StringBuilder("/exchange/order_book?");
+
+            sb.AppendFormat("currencyPair={0}", pair);
+            if (depth < 100) sb.AppendFormat("depth={0}", depth.ToString());
 
             return sb.ToString();
         }
