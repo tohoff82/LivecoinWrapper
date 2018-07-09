@@ -60,5 +60,11 @@ namespace LivecoinWrapper.DataLayer.RequestData
         {
             return new StringBuilder("/exchange/restrictions").ToString();
         }
+        //------------------------------------------------------------------------------------------//
+
+        public static string GetCoinInfoUri()
+        {
+            return new StringBuilder("/info/coinInfo").ToString();
+        }
     }
 }

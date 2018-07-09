@@ -84,6 +84,11 @@ namespace LivecoinWrapper
             return await JsonGetAsync<Restrictions>(LiveMethod.GetRestrictionsUri());
         }
 
+        public async Task<Coins> GetCoinInfoAsync()
+        {
+            return await JsonGetAsync<Coins>(LiveMethod.GetCoinInfoUri());
+        }
+
         #endregion
 
 
