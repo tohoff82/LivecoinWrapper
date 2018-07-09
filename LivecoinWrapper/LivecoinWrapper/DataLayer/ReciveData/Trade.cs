@@ -8,18 +8,38 @@ namespace LivecoinWrapper.DataLayer.ReciveData
     public class Trade
     {
         [JsonProperty(PropertyName = "time")]
-        public int Time { get; set; }
+        public ulong Time { get; set; }
 
         [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
+        public ulong Id { get; set; }
 
         [JsonProperty(PropertyName = "price")]
-        public decimal Price { get; set; }
+        private readonly string price;
 
         [JsonProperty(PropertyName = "quantity")]
-        public decimal Quantity { get; set; }
+        private readonly string quantity;
 
         [JsonProperty(PropertyName = "type")]
         public string OrderType { get; set; }
+
+       
+        //Сделал эти костыли по причине того, что иногда в ответе цена представлена
+        //строкой в таком виде -->  1.4E-4 по другому как распарсить пока не придумал
+
+        public decimal Price
+        {
+            get
+            {
+                return (decimal)Convert.ToDouble(price.Replace(".",","));
+            }
+        }
+
+        public decimal Quantity
+        {
+            get
+            {
+                return (decimal)Convert.ToDouble(quantity.Replace(".", ","));
+            }
+        }
     }
 }
