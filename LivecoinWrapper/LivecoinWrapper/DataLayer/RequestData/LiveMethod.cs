@@ -27,7 +27,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
         }
         //------------------------------------------------------------------------------------------//
 
-        public static string GetOllOrdebookUri(int depth = 10)
+        public static string GetAllOrdebookUri(int depth = 10)
         {
             var sb = new StringBuilder("/exchange/all/order_book");
 
@@ -54,6 +54,11 @@ namespace LivecoinWrapper.DataLayer.RequestData
             if (pair == "allPairs") return sb.ToString();
             else return sb.AppendFormat("?currencyPair={0}", pair).ToString();
         }
+        //------------------------------------------------------------------------------------------//
 
+        public static string GetRestrictionsUri()
+        {
+            return new StringBuilder("/exchange/restrictions").ToString();
+        }
     }
 }

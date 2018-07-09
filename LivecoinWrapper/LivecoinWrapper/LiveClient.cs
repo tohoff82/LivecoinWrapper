@@ -57,15 +57,15 @@ namespace LivecoinWrapper
 
         public async Task<List<Trade>> GetLastTradesAsync(string marketPair, string ordType = "false", string minOrHour = "false")
         {
-            // minOrHour = "true" - данные за последнюю минуту, "false"(по умолчанию) - данные за час
             // ordType = "BUY" or "SELL", "false"(по умолчанию)
+            // minOrHour = "true" - данные за последнюю минуту, "false"(по умолчанию) - данные за час
             return await JsonGetAsync<List<Trade>>(LiveMethod.GetLasttradeUri(marketPair, ordType, minOrHour));
         }
 
 
         public async Task<object> GetAllOrderBookAsync()
         {
-            return await JsonGetAsync<object>(LiveMethod.GetOllOrdebookUri());
+            return await JsonGetAsync<object>(LiveMethod.GetAllOrdebookUri());
         }
 
         public async Task<OrderBook> GetOrderBookAsync(string marketPair, int depth = 100)
@@ -77,6 +77,11 @@ namespace LivecoinWrapper
         public async Task<MaxMinBidAsk> GetMaxMinBidAskAsync(string marketPair = "allPairs")
         {
             return await JsonGetAsync<MaxMinBidAsk>(LiveMethod.GetMaxMinBidAskUri(marketPair));
+        }
+
+        public async Task<Restrictions> GetRestrictionsAsync()
+        {
+            return await JsonGetAsync<Restrictions>(LiveMethod.GetRestrictionsUri());
         }
 
         #endregion
