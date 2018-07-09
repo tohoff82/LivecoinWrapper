@@ -47,7 +47,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(lastPrice.Replace(".", ","));
+                if (lastPrice != null) return (decimal)Convert.ToDouble(lastPrice.Replace(".", ","));
+                else return -1;
             }
         }
         
@@ -55,7 +56,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(highPrice.Replace(".", ","));
+                if (highPrice != null) return (decimal)Convert.ToDouble(highPrice.Replace(".", ","));
+                else return -1;
             }
         }
 
@@ -63,7 +65,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(lowPrice.Replace(".", ","));
+                if (lowPrice != null) return (decimal)Convert.ToDouble(lowPrice.Replace(".", ","));
+                else return -1;
             }
         }
 
@@ -71,7 +74,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(volume.Replace(".", ","));
+                if(volume != null) return (decimal)Convert.ToDouble(volume.Replace(".", ","));
+                else return -1;
             }
         }
 
@@ -79,7 +83,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(volumeWap.Replace(".", ","));
+                if(volumeWap != null) return (decimal)Convert.ToDouble(volumeWap.Replace(".", ","));
+                else return -1;
             }
         }
 
@@ -87,7 +92,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(maximumBid.Replace(".", ","));
+                if(maximumBid != null) return (decimal)Convert.ToDouble(maximumBid.Replace(".", ","));
+                else return -1;
             }
         }
 
@@ -95,7 +101,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(minimumAsk.Replace(".", ","));
+                if(minimumAsk != null) return (decimal)Convert.ToDouble(minimumAsk.Replace(".", ","));
+                else return -1;
             }
         }
 
@@ -103,7 +110,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(bestBid.Replace(".", ","));
+                if(bestBid != null) return (decimal)Convert.ToDouble(bestBid.Replace(".", ","));
+                else return -1;
             }
         }
 
@@ -111,7 +119,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(bestAsk.Replace(".", ","));
+                if(bestAsk != null) return (decimal)Convert.ToDouble(bestAsk.Replace(".", ","));
+                else return -1;
             }
         }
     }

@@ -30,7 +30,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(price.Replace(".",","));
+                if(price != null) return (decimal)Convert.ToDouble(price.Replace(".",","));
+                else return -1;
             }
         }
 
@@ -38,7 +39,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(quantity.Replace(".", ","));
+                if(quantity != null) return (decimal)Convert.ToDouble(quantity.Replace(".", ","));
+                else return -1;
             }
         }
     }

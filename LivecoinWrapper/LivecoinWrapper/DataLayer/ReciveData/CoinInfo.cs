@@ -34,24 +34,41 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         [JsonProperty(PropertyName = "symbol")]
         public string Symbol { get; set; }
 
+        [JsonProperty(PropertyName = "difficulty")]
+        private readonly string difficulty;
+
         [JsonProperty(PropertyName = "walletStatus")]
         public WalletStatus WalletStatus { get; set; }
 
         [JsonProperty(PropertyName = "withdrawFee")]
         private readonly string withdrawFee;
 
-        [JsonProperty(PropertyName = "minDepositAmount ")]
+        [JsonProperty(PropertyName = "minDepositAmount")]
         private readonly string minDepositAmount;
 
-        [JsonProperty(PropertyName = "minWithdrawAmount  ")]
+        [JsonProperty(PropertyName = "minWithdrawAmount")]
         private readonly string minWithdrawAmount;
 
+        [JsonProperty(PropertyName = "minOrderAmount")]
+        private readonly string minOrderAmount;
+
+
+
+        public decimal Difficulty
+        {
+            get
+            {
+                if (difficulty != null) return (decimal)Convert.ToDouble(difficulty.Replace(".", ","));
+                else return -1;
+            }
+        }
 
         public decimal WithdrawFee
         {
             get
             {
-                return (decimal)Convert.ToDouble(withdrawFee.Replace(".", ","));
+                if(withdrawFee != null) return (decimal)Convert.ToDouble(withdrawFee.Replace(".", ","));
+                else return -1;
             }
         }
 
@@ -59,7 +76,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(minDepositAmount.Replace(".", ","));
+                if (minDepositAmount != null) return (decimal)Convert.ToDouble(minDepositAmount.Replace(".", ","));
+                else return -1;
             }
         }
 
@@ -67,7 +85,17 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(minWithdrawAmount.Replace(".", ","));
+                if (minWithdrawAmount != null) return (decimal)Convert.ToDouble(minWithdrawAmount.Replace(".", ","));
+                else return -1;
+            }
+        }
+
+        public decimal MinOrderAmount
+        {
+            get
+            {
+                if (minOrderAmount != null) return (decimal)Convert.ToDouble(minOrderAmount.Replace(".", ","));
+                else return -1;
             }
         }
 

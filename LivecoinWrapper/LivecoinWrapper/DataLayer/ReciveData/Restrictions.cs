@@ -24,7 +24,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(minBtcVolume.Replace(".", ","));
+                if (minBtcVolume != null) return (decimal)Convert.ToDouble(minBtcVolume.Replace(".", ","));
+                else return -1;
             }
         }
     }
@@ -46,7 +47,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(minLimitQuantity.Replace(".", ","));
+                if (minLimitQuantity != null) return (decimal)Convert.ToDouble(minLimitQuantity.Replace(".", ","));
+                else return -1;
             }
         }
     }

@@ -30,8 +30,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                //необходимо будет добавить проверку на null, так как иногда приходит..
-                return (decimal)Convert.ToDouble(maxBid.Replace(".", ","));
+                if (maxBid != null) return (decimal)Convert.ToDouble(maxBid.Replace(".", ","));
+                else return -1;
             }
         }
 
@@ -39,7 +39,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                return (decimal)Convert.ToDouble(minAsk.Replace(".", ","));
+                if (minAsk != null) return (decimal)Convert.ToDouble(minAsk.Replace(".", ","));
+                else return -1;
             }
         }
     }
