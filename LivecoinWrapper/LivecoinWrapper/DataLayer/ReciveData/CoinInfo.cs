@@ -5,6 +5,27 @@ using System.Text;
 
 namespace LivecoinWrapper.DataLayer.ReciveData
 {
+    public class Coins
+    {
+        [JsonProperty(PropertyName = "success")]
+        public bool Success { get; set; }
+
+        [JsonProperty(PropertyName = "minimalOrderBTC")]
+        private readonly string minimalOrderBTC;
+
+        [JsonProperty(PropertyName = "info")]
+        public List<CoinInfo> CoinList { get; set; }
+
+
+        public decimal MinimalOrderBTC
+        {
+            get
+            {
+                return (decimal)Convert.ToDouble(minimalOrderBTC.Replace(".", ","));
+            }
+        }
+    }
+
     public class CoinInfo
     {
         [JsonProperty(PropertyName = "name")]
