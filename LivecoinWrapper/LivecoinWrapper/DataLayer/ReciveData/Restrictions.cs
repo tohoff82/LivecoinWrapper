@@ -37,16 +37,16 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         [JsonProperty(PropertyName = "priceScale")]
         public byte PriceScale { get; set; }
 
-        [JsonProperty(PropertyName = "inLimitQuantity")]
-        private readonly string inLimitQuantity;
+        [JsonProperty(PropertyName = "minLimitQuantity")]
+        private readonly string minLimitQuantity;
 
 
 
-        public decimal InLimitQuantity
+        public decimal MinLimitQuantity
         {
             get
             {
-                return (decimal)Convert.ToDouble(inLimitQuantity.Replace(".", ","));
+                return (decimal)Convert.ToDouble(minLimitQuantity.Replace(".", ","));
             }
         }
     }
