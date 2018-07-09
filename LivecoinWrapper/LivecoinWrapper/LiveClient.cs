@@ -42,16 +42,24 @@ namespace LivecoinWrapper
             return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<T>(json));
         }
 
+
+
+        #region Private Methods
+
+
+
+        #endregion
+
         #region Public Methods
 
         public async Task<List<Ticker>> GetTickerAsync()
         {
-            return await JsonGetAsync<List<Ticker>>(LiveMethod.GetTickerUri());
+            return await JsonGetAsync<List<Ticker>>(GetMethod.TickerUri());
         }
 
         public async Task<Ticker> GetTickerAsync(string marketPair)
         {
-            return await JsonGetAsync<Ticker>(LiveMethod.GetTickerUri(marketPair));
+            return await JsonGetAsync<Ticker>(GetMethod.TickerUri(marketPair));
         }
 
 
@@ -59,38 +67,36 @@ namespace LivecoinWrapper
         {
             // ordType = "BUY" or "SELL", "false"(по умолчанию)
             // minOrHour = "true" - данные за последнюю минуту, "false"(по умолчанию) - данные за час
-            return await JsonGetAsync<List<Trade>>(LiveMethod.GetLasttradeUri(marketPair, ordType, minOrHour));
+            return await JsonGetAsync<List<Trade>>(GetMethod.LasttradeUri(marketPair, ordType, minOrHour));
         }
 
 
         public async Task<object> GetAllOrderBookAsync()
         {
-            return await JsonGetAsync<object>(LiveMethod.GetAllOrdebookUri());
+            return await JsonGetAsync<object>(GetMethod.AllOrdebookUri());
         }
 
         public async Task<OrderBook> GetOrderBookAsync(string marketPair, int depth = 100)
         {
-            return await JsonGetAsync<OrderBook>(LiveMethod.GetOrderbookUri(marketPair, depth));
+            return await JsonGetAsync<OrderBook>(GetMethod.OrderbookUri(marketPair, depth));
         }
 
 
         public async Task<MaxMinBidAsk> GetMaxMinBidAskAsync(string marketPair = "allPairs")
         {
-            return await JsonGetAsync<MaxMinBidAsk>(LiveMethod.GetMaxMinBidAskUri(marketPair));
+            return await JsonGetAsync<MaxMinBidAsk>(GetMethod.MaxMinBidAskUri(marketPair));
         }
 
         public async Task<Restrictions> GetRestrictionsAsync()
         {
-            return await JsonGetAsync<Restrictions>(LiveMethod.GetRestrictionsUri());
+            return await JsonGetAsync<Restrictions>(GetMethod.RestrictionsUri());
         }
 
         public async Task<Coins> GetCoinInfoAsync()
         {
-            return await JsonGetAsync<Coins>(LiveMethod.GetCoinInfoUri());
+            return await JsonGetAsync<Coins>(GetMethod.CoinInfoUri());
         }
 
         #endregion
-
-
     }
 }

@@ -4,9 +4,17 @@ using System.Text;
 
 namespace LivecoinWrapper.DataLayer.RequestData
 {
-    public static class LiveMethod
+    public static class GetMethod
     {
-        public static string GetTickerUri(string pair = "allpair")
+        #region Request Uri for private methods
+
+
+
+        #endregion
+
+        #region Request Uri for public methods
+
+        public static string TickerUri(string pair = "allpair")
         {
             var sb = new StringBuilder("/exchange/ticker");
 
@@ -15,7 +23,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
         }
         //------------------------------------------------------------------------------------------//
 
-        public static string GetLasttradeUri(string pair, string ordType, string minOrHour)
+        public static string LasttradeUri(string pair, string ordType, string minOrHour)
         {
             var sb = new StringBuilder("/exchange/last_trades?");
 
@@ -27,7 +35,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
         }
         //------------------------------------------------------------------------------------------//
 
-        public static string GetAllOrdebookUri(int depth = 10)
+        public static string AllOrdebookUri(int depth = 10)
         {
             var sb = new StringBuilder("/exchange/all/order_book");
 
@@ -36,7 +44,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
             return sb.ToString();
         }
 
-        public static string GetOrderbookUri(string pair, int depth)
+        public static string OrderbookUri(string pair, int depth)
         {
             var sb = new StringBuilder("/exchange/order_book?");
 
@@ -47,7 +55,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
         }
         //------------------------------------------------------------------------------------------//
 
-        public static string GetMaxMinBidAskUri(string pair)
+        public static string MaxMinBidAskUri(string pair)
         {
             var sb = new StringBuilder("/exchange/maxbid_minask");
 
@@ -56,15 +64,17 @@ namespace LivecoinWrapper.DataLayer.RequestData
         }
         //------------------------------------------------------------------------------------------//
 
-        public static string GetRestrictionsUri()
+        public static string RestrictionsUri()
         {
             return new StringBuilder("/exchange/restrictions").ToString();
         }
         //------------------------------------------------------------------------------------------//
 
-        public static string GetCoinInfoUri()
+        public static string CoinInfoUri()
         {
             return new StringBuilder("/info/coinInfo").ToString();
         }
+
+        #endregion
     }
 }
