@@ -13,8 +13,8 @@ namespace LivecoinWrapper
     {
         private HttpClient httpClient;
 
-        private string publicKey;
-        private string secretKey;
+        private readonly string publicKey;
+        private readonly string secretKey;
 
         private const string baseAddress = "https://api.livecoin.net";
 
@@ -46,20 +46,31 @@ namespace LivecoinWrapper
 
         public async Task<List<Ticker>> GetTickerAsync()
         {
-            return await JsonGetAsync<List<Ticker>>(LiveMethod.GetTickers());
+            return await JsonGetAsync<List<Ticker>>(LiveMethod.GetTickerUri());
         }
 
         public async Task<Ticker> GetTickerAsync(string marketPair)
         {
-            return await JsonGetAsync<Ticker>(LiveMethod.GetTicker(marketPair));
+            return await JsonGetAsync<Ticker>(LiveMethod.GetTickerUri(marketPair));
         }
 
 
-        public async Task<List<Trade>> GetLastTradesAsync(string marketPair)
+        public async Task<List<Trade>> GetLastTradesAsync(string marketPair, string ordType = "false", string minOrHour = "false")
         {
             // minOrHour = "true" - данные за последнюю минуту, "false"(по умолчанию) - данные за час
-            // type = "BUY" or "SELL", "false"(по умолчанию)
-            return await JsonGetAsync<List<Trade>>(LiveMethod.GetTradeline(marketPair));
+            // ordType = "BUY" or "SELL", "false"(по умолчанию)
+            return await JsonGetAsync<List<Trade>>(LiveMethod.GetLasttradeUri(marketPair, ordType, minOrHour));
+        }
+
+
+        public async Task<object> GetOllOrderBookAsync()
+        {
+            return await JsonGetAsync<object>(LiveMethod.GetOllOrdebookUri());
+        }
+
+        public async Task<OrderBook> GetOrderBookAsync(string marketPair)
+        {
+            return await JsonGetAsync<OrderBook>(LiveMethod.GetOrderbookUri(marketPair));
         }
 
         #endregion
