@@ -8,7 +8,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
     public class MaxMinBidAsk
     {
         [JsonProperty(PropertyName = "currencyPairs")]
-        List<CurrencyPairs> Currencies { get; set; }
+        public List<CurrencyPairs> Currencies { get; set; }
     }
 
     public class CurrencyPairs
@@ -30,6 +30,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
+                //необходимо будет добавить проверку на null так как иногда приходит..
                 return (decimal)Convert.ToDouble(maxBid.Replace(".", ","));
             }
         }
