@@ -36,14 +36,23 @@ namespace LivecoinWrapper.DataLayer.RequestData
             return sb.ToString();
         }
 
-        public static string GetOrderbookUri(string pair, int depth = 100)
+        public static string GetOrderbookUri(string pair, int depth)
         {
             var sb = new StringBuilder("/exchange/order_book?");
 
             sb.AppendFormat("currencyPair={0}", pair);
-            if (depth < 100) sb.AppendFormat("depth={0}", depth.ToString());
+            if (depth < 100) sb.AppendFormat("&depth={0}", depth.ToString());
 
             return sb.ToString();
+        }
+        //------------------------------------------------------------------------------------------//
+
+        public static string GetMaxMinBidAskUri(string pair)
+        {
+            var sb = new StringBuilder("/exchange/maxbid_minask");
+
+            if (pair == "allPairs") return sb.ToString();
+            else return sb.AppendFormat("?currencyPair={0}", pair).ToString();
         }
 
     }

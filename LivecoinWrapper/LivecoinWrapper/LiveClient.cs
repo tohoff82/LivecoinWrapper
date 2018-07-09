@@ -63,14 +63,20 @@ namespace LivecoinWrapper
         }
 
 
-        public async Task<object> GetOllOrderBookAsync()
+        public async Task<object> GetAllOrderBookAsync()
         {
             return await JsonGetAsync<object>(LiveMethod.GetOllOrdebookUri());
         }
 
-        public async Task<OrderBook> GetOrderBookAsync(string marketPair)
+        public async Task<OrderBook> GetOrderBookAsync(string marketPair, int depth = 100)
         {
-            return await JsonGetAsync<OrderBook>(LiveMethod.GetOrderbookUri(marketPair));
+            return await JsonGetAsync<OrderBook>(LiveMethod.GetOrderbookUri(marketPair, depth));
+        }
+
+
+        public async Task<MaxMinBidAsk> GetMaxMinBidAskAsync(string marketPair = "allPairs")
+        {
+            return await JsonGetAsync<MaxMinBidAsk>(LiveMethod.GetMaxMinBidAskUri(marketPair));
         }
 
         #endregion
