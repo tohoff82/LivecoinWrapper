@@ -15,7 +15,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
         }
         //------------------------------------------------------------------------------------------//
 
-        public static string GetLasttradeUri(string pair, string ordType = "false", string minOrHour = "false")
+        public static string GetLasttradeUri(string pair, string ordType, string minOrHour)
         {
             var sb = new StringBuilder("/exchange/last_trades?");
 
@@ -27,7 +27,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
         }
         //------------------------------------------------------------------------------------------//
 
-        public static string GetOllOrdebook(int depth = 10)
+        public static string GetOllOrdebookUri(int depth = 10)
         {
             var sb = new StringBuilder("/exchange/all/order_book");
 
@@ -36,7 +36,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
             return sb.ToString();
         }
 
-        public static string GetOrderbook(string pair, int depth = 100)
+        public static string GetOrderbookUri(string pair, int depth = 100)
         {
             var sb = new StringBuilder("/exchange/order_book?");
 

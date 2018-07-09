@@ -8,7 +8,8 @@ namespace LivecoinWrapper.DataLayer
     {
         public static string BtcUsd { get { return "BTC/USD"; } }
         public static string EmcBtc { get { return "EMC/BTC"; } }
-        public static string EmcUsd { get { return "EMC/BTC"; } }
+        public static string EmcUsd { get { return "EMC/USD"; } }
         public static string WgrBtc { get { return "WGR/BTC"; } }
+        public static string CvcEth { get { return "CVC/ETH"; } }
     }
 }
