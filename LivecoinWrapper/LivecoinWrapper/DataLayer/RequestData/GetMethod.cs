@@ -6,12 +6,6 @@ namespace LivecoinWrapper.DataLayer.RequestData
 {
     public static class GetMethod
     {
-        #region Request Uri for private methods
-
-
-
-        #endregion
-
         #region Request Uri for public methods
 
         public static string TickerUri(string pair = "allpair")
