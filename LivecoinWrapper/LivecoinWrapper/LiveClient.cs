@@ -13,21 +13,10 @@ namespace LivecoinWrapper
     {
         private HttpClient httpClient;
 
-        private readonly string publicKey;
-        private readonly string secretKey;
-
         private const string baseAddress = "https://api.livecoin.net";
 
         public LiveClient()
         {
-            httpClient = new HttpClient { BaseAddress = new Uri(baseAddress) };
-        }
-
-        public LiveClient(string pubKey, string secKey)
-        {
-            publicKey = pubKey;
-            secretKey = secKey;
-
             httpClient = new HttpClient { BaseAddress = new Uri(baseAddress) };
         }
 
@@ -42,13 +31,6 @@ namespace LivecoinWrapper
             return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<T>(json));
         }
 
-
-
-        #region Private Methods
-
-
-
-        #endregion
 
         #region Public Methods
 
