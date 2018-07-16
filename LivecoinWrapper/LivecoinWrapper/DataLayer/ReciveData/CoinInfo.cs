@@ -7,98 +7,83 @@ namespace LivecoinWrapper.DataLayer.ReciveData
 {
     public class Coins
     {
-        [JsonProperty(PropertyName = "success")]
+        [JsonProperty("success")]
         public bool Success { get; set; }
 
-        [JsonProperty(PropertyName = "minimalOrderBTC")]
+        [JsonProperty("minimalOrderBTC")]
         private readonly string minimalOrderBTC;
-
-        [JsonProperty(PropertyName = "info")]
-        public List<CoinInfo> CoinList { get; set; }
-
-
         public decimal MinimalOrderBTC
         {
             get
             {
-                return (decimal)Convert.ToDouble(minimalOrderBTC.Replace(".", ","));
+                return minimalOrderBTC != null ? (decimal)Convert.ToDouble(minimalOrderBTC.Replace(".", ",")) : -1;
             }
         }
+
+        [JsonProperty("info")]
+        public List<CoinInfo> CoinList { get; set; }
     }
 
     public class CoinInfo
     {
-        [JsonProperty(PropertyName = "name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "symbol")]
+        [JsonProperty("symbol")]
         public string Symbol { get; set; }
 
-        [JsonProperty(PropertyName = "difficulty")]
+        [JsonProperty("difficulty")]
         private readonly string difficulty;
-
-        [JsonProperty(PropertyName = "walletStatus")]
-        public WalletStatus WalletStatus { get; set; }
-
-        [JsonProperty(PropertyName = "withdrawFee")]
-        private readonly string withdrawFee;
-
-        [JsonProperty(PropertyName = "minDepositAmount")]
-        private readonly string minDepositAmount;
-
-        [JsonProperty(PropertyName = "minWithdrawAmount")]
-        private readonly string minWithdrawAmount;
-
-        [JsonProperty(PropertyName = "minOrderAmount")]
-        private readonly string minOrderAmount;
-
-
-
         public decimal Difficulty
         {
             get
             {
-                if (difficulty != null) return (decimal)Convert.ToDouble(difficulty.Replace(".", ","));
-                else return -1;
+                return difficulty != null ? (decimal)Convert.ToDouble(difficulty.Replace(".", ",")) : -1;
             }
         }
 
+        [JsonProperty("walletStatus")]
+        public WalletStatus WalletStatus { get; set; }
+
+        [JsonProperty("withdrawFee")]
+        private readonly string withdrawFee;
         public decimal WithdrawFee
         {
             get
             {
-                if(withdrawFee != null) return (decimal)Convert.ToDouble(withdrawFee.Replace(".", ","));
-                else return -1;
+                return withdrawFee != null ? (decimal)Convert.ToDouble(withdrawFee.Replace(".", ",")) : -1;
             }
         }
 
+        [JsonProperty("minDepositAmount")]
+        private readonly string minDepositAmount;
         public decimal MinDepositAmount
         {
             get
             {
-                if (minDepositAmount != null) return (decimal)Convert.ToDouble(minDepositAmount.Replace(".", ","));
-                else return -1;
+                return minDepositAmount != null ? (decimal)Convert.ToDouble(minDepositAmount.Replace(".", ",")) : -1;
             }
         }
 
+        [JsonProperty("minWithdrawAmount")]
+        private readonly string minWithdrawAmount;
         public decimal MinWithdrawAmount
         {
             get
             {
-                if (minWithdrawAmount != null) return (decimal)Convert.ToDouble(minWithdrawAmount.Replace(".", ","));
-                else return -1;
+                return minWithdrawAmount != null ? (decimal)Convert.ToDouble(minWithdrawAmount.Replace(".", ",")) : -1;
             }
         }
 
+        [JsonProperty("minOrderAmount")]
+        private readonly string minOrderAmount;
         public decimal MinOrderAmount
         {
             get
             {
-                if (minOrderAmount != null) return (decimal)Convert.ToDouble(minOrderAmount.Replace(".", ","));
-                else return -1;
+                return minOrderAmount != null ? (decimal)Convert.ToDouble(minOrderAmount.Replace(".", ",")) : -1;
             }
         }
-
     }
 
     public enum WalletStatus
