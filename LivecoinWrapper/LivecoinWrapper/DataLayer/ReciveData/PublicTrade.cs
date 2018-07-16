@@ -5,21 +5,21 @@ using System.Text;
 
 namespace LivecoinWrapper.DataLayer.ReciveData
 {
-    public class Trade
+    public class PublicTrade
     {
-        [JsonProperty(PropertyName = "time")]
+        [JsonProperty("time")]
         public ulong Time { get; set; }
 
-        [JsonProperty(PropertyName = "id")]
+        [JsonProperty("id")]
         public ulong Id { get; set; }
 
-        [JsonProperty(PropertyName = "price")]
+        [JsonProperty("price")]
         private readonly string price;
 
-        [JsonProperty(PropertyName = "quantity")]
+        [JsonProperty("quantity")]
         private readonly string quantity;
 
-        [JsonProperty(PropertyName = "type")]
+        [JsonProperty("type")]
         public string OrderType { get; set; }
 
        
@@ -30,8 +30,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                if(price != null) return (decimal)Convert.ToDouble(price.Replace(".",","));
-                else return -1;
+                return price != null ? (decimal)Convert.ToDouble(price.Replace(".",",")) : -1;
             }
         }
 
@@ -39,8 +38,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                if(quantity != null) return (decimal)Convert.ToDouble(quantity.Replace(".", ","));
-                else return -1;
+                return quantity != null ? (decimal)Convert.ToDouble(quantity.Replace(".", ",")) : -1;
             }
         }
     }

@@ -1,19 +1,18 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LivecoinWrapper.DataLayer.ReciveData
 {
     public class Restrictions
     {
-        [JsonProperty(PropertyName = "success")]
+        [JsonProperty("success")]
         public bool Success { get; set; }
 
-        [JsonProperty(PropertyName = "minBtcVolume")]
+        [JsonProperty("minBtcVolume")]
         private readonly string minBtcVolume;
 
-        [JsonProperty(PropertyName = "restrictions")]
+        [JsonProperty("restrictions")]
         public List<Restriction> RestrictionList { get; set; }
 
 
@@ -24,31 +23,27 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                if (minBtcVolume != null) return (decimal)Convert.ToDouble(minBtcVolume.Replace(".", ","));
-                else return -1;
+                return minBtcVolume != null ? (decimal)Convert.ToDouble(minBtcVolume.Replace(".", ",")) : -1;
             }
         }
     }
 
     public class Restriction
     {
-        [JsonProperty(PropertyName = "currencyPair")]
+        [JsonProperty("currencyPair")]
         public string CurrencyPair { get; set; }
 
-        [JsonProperty(PropertyName = "priceScale")]
+        [JsonProperty("priceScale")]
         public byte PriceScale { get; set; }
 
-        [JsonProperty(PropertyName = "minLimitQuantity")]
+        [JsonProperty("minLimitQuantity")]
         private readonly string minLimitQuantity;
-
-
 
         public decimal MinLimitQuantity
         {
             get
             {
-                if (minLimitQuantity != null) return (decimal)Convert.ToDouble(minLimitQuantity.Replace(".", ","));
-                else return -1;
+                return minLimitQuantity != null ? (decimal)Convert.ToDouble(minLimitQuantity.Replace(".", ",")) : -1;
             }
         }
     }

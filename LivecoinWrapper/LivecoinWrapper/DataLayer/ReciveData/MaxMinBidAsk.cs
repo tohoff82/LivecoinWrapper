@@ -7,19 +7,19 @@ namespace LivecoinWrapper.DataLayer.ReciveData
 {
     public class MaxMinBidAsk
     {
-        [JsonProperty(PropertyName = "currencyPairs")]
+        [JsonProperty("currencyPairs")]
         public List<CurrencyPairs> Currencies { get; set; }
     }
 
     public class CurrencyPairs
     {
-        [JsonProperty(PropertyName = "symbol")]
+        [JsonProperty("symbol")]
         public string Symbol { get; set; }
 
-        [JsonProperty(PropertyName = "maxBid")]
+        [JsonProperty("maxBid")]
         private readonly string maxBid;
 
-        [JsonProperty(PropertyName = "minAsk")]
+        [JsonProperty("minAsk")]
         private readonly string minAsk;
 
 
@@ -30,8 +30,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                if (maxBid != null) return (decimal)Convert.ToDouble(maxBid.Replace(".", ","));
-                else return -1;
+                return  maxBid != null ? (decimal)Convert.ToDouble(maxBid.Replace(".", ",")) : -1;
             }
         }
 
@@ -39,8 +38,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             get
             {
-                if (minAsk != null) return (decimal)Convert.ToDouble(minAsk.Replace(".", ","));
-                else return -1;
+                return minAsk != null ? (decimal)Convert.ToDouble(minAsk.Replace(".", ",")) : -1;
             }
         }
     }

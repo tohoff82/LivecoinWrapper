@@ -7,10 +7,10 @@ namespace LivecoinWrapper.DataLayer.ReciveData
 {
     public class OrderBook
     {
-        [JsonProperty(PropertyName = "timestamp")]
+        [JsonProperty("timestamp")]
         public ulong Timestamp { get; set; }
 
-        [JsonProperty(PropertyName = "asks")]
+        [JsonProperty("asks")]
         private readonly List<List<string>> asks;
 
         [JsonProperty(PropertyName = "bids")]
@@ -46,8 +46,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
                 {
                     list.Add(new List<decimal>
                     {
-                        (decimal)Convert.ToDouble(ask[0].Replace('.', ',')),
-                        (decimal)Convert.ToDouble(ask[1].Replace('.', ','))
+                        ask[0] != null ? (decimal)Convert.ToDouble(ask[0].Replace('.', ',')) : -1,
+                        ask[1] != null ? (decimal)Convert.ToDouble(ask[1].Replace('.', ',')) : -1
                     });
                 }
             }
