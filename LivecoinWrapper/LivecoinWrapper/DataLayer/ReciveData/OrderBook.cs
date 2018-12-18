@@ -1,59 +1,55 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
+
+using static System.Globalization.CultureInfo;
+using static System.Globalization.NumberStyles;
 
 namespace LivecoinWrapper.DataLayer.ReciveData
 {
     public class OrderBook
     {
+        public List<DepthItem> Asks = new List<DepthItem>();
+        public List<DepthItem> Bids = new List<DepthItem>();
+
         [JsonProperty("timestamp")]
         public ulong Timestamp { get; set; }
 
         [JsonProperty("asks")]
-        private readonly List<List<string>> asks;
-
-        [JsonProperty(PropertyName = "bids")]
-        private readonly List<List<string>> bids;
-
-
-        //Сделал эти костыли по причине того, что иногда в ответе цена представлена
-        //строкой в таком виде -->  1.4E-4 по другому как распарсить пока не придумал
-
-        public List<List<decimal>> Asks
+        private List<List<string>> ComingAsks
         {
-            get
+            set
             {
-                return ConvertToDecimal(asks);
-            }
-        }
-        
-        public List<List<decimal>> Bids
-        {
-            get
-            {
-                return ConvertToDecimal(bids);
-            }
-        }
-
-        private List<List<decimal>> ConvertToDecimal(List<List<string>> askList)
-        {
-            var list = new List<List<decimal>>();
-
-            foreach (var ask in askList)
-            {
-                for (int i = 0; i < ask.Count; i++)
+                foreach (var item in value)
                 {
-                    list.Add(new List<decimal>
-                    {
-                        ask[0] != null ? (decimal)Convert.ToDouble(ask[0].Replace('.', ',')) : -1,
-                        ask[1] != null ? (decimal)Convert.ToDouble(ask[1].Replace('.', ',')) : -1
-                    });
+                    if (item != null) Asks.Add(new DepthItem(item));
                 }
             }
-
-            return list;
         }
 
+        [JsonProperty("bids")]
+        private List<List<string>> ComingBids
+        {
+            set
+            {
+                foreach (var item in value)
+                {
+                    if (item != null) Bids.Add(new DepthItem(item));
+                }
+            }
+        }
+    }
+
+    public class DepthItem
+    {
+        public readonly decimal rate;
+        public readonly decimal amount;
+        public readonly ulong depthItemTime;
+
+        public DepthItem(List<string> lst)
+        {
+            decimal.TryParse(lst[0], Any, InvariantCulture, out rate);
+            decimal.TryParse(lst[1], Any, InvariantCulture, out amount);
+            ulong.TryParse(lst[2], Any, InvariantCulture, out depthItemTime);
+        }
     }
 }
