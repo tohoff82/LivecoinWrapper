@@ -1,45 +1,33 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
+
+using static System.Globalization.CultureInfo;
+using static System.Globalization.NumberStyles;
 
 namespace LivecoinWrapper.DataLayer.ReciveData
 {
-    public class MaxMinBidAsk
+    public class MaxBidMinAsk
     {
         [JsonProperty("currencyPairs")]
-        public List<CurrencyPairs> Currencies { get; set; }
+        public List<PairInfo> Currencies { get; set; }
     }
 
-    public class CurrencyPairs
+    public class PairInfo
     {
         [JsonProperty("symbol")]
-        public string Symbol { get; set; }
+        public string Symbol { get; private set; }
+        
+        private readonly decimal maxBid;
+        public decimal MaxBid { get => maxBid; }
+        
+        private readonly decimal minAsk;
+        public decimal MinAsk { get => minAsk; }
 
-        [JsonProperty("maxBid")]
-        private readonly string maxBid;
-
-        [JsonProperty("minAsk")]
-        private readonly string minAsk;
-
-
-        //Сделал эти костыли по причине того, что иногда в ответе цена представлена
-        //строкой в таком виде -->  1.4E-4 по другому как распарсить пока не придумал
-
-        public decimal MaxBid
+        [JsonConstructor]
+        public PairInfo(string maxBid, string minAsk)
         {
-            get
-            {
-                return  maxBid != null ? (decimal)Convert.ToDouble(maxBid.Replace(".", ",")) : -1;
-            }
-        }
-
-        public decimal MinAsk
-        {
-            get
-            {
-                return minAsk != null ? (decimal)Convert.ToDouble(minAsk.Replace(".", ",")) : -1;
-            }
+            decimal.TryParse(maxBid, Any, InvariantCulture, out this.maxBid);
+            decimal.TryParse(minAsk, Any, InvariantCulture, out this.minAsk);
         }
     }
 }
