@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+
 using static LivecoinWrapper.Helper.Enums.RequestType;
 using static LivecoinWrapper.DataLayer.MarketPair;
 
