@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using static LivecoinWrapper.Helper.Enums.RequestType;
+﻿using static LivecoinWrapper.Helper.Enums.RequestType;
 
 namespace LivecoinWrapper.DataLayer.RequestData
 {
