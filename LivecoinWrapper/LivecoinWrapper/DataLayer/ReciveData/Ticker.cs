@@ -1,119 +1,58 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
+using static System.Globalization.CultureInfo;
+using static System.Globalization.NumberStyles;
 
 namespace LivecoinWrapper.DataLayer.ReciveData
 {
     public class Ticker
     {
         [JsonProperty("cur")]
-        public string Currency { get; set; }
+        public string Currency { get; private set; }
 
         [JsonProperty("symbol")]
-        public string CurSymbol { get; set; }
-
-        [JsonProperty("last")]
-        private readonly string lastPrice;
-
-        [JsonProperty("high")]
-        private readonly string highPrice;
-
-        [JsonProperty("low")]
-        private readonly string lowPrice;
-
-        [JsonProperty("volume")]
-        private readonly string volume;
-
-        [JsonProperty("vwap")]
-        private readonly string volumeWap;
-
-        [JsonProperty("max_bid")]
-        private readonly string maximumBid;
-
-        [JsonProperty("min_ask")]
-        private readonly string minimumAsk;
-
-        [JsonProperty("best_bid")]
-        private readonly string bestBid;
-
-        [JsonProperty("best_ask")]
-        private readonly string bestAsk;
-
-        //Сделал эти костыли по причине того, что иногда в ответе цена представлена
-        //строкой в таком виде -->  1.4E-4 по другому как распарсить пока не придумал
-        //еслиприходит null в параметр помещается -1
-
-        public decimal LastPrice
-        {
-            get
-            {
-                return lastPrice != null ? (decimal)Convert.ToDouble(lastPrice.Replace(".", ",")) : -1;
-            }
-        }
+        public string CurSymbol { get; private set; }
         
-        public decimal HighPrice
-        {
-            get
-            {
-                return highPrice != null ? (decimal)Convert.ToDouble(highPrice.Replace(".", ",")) : -1;
-            }
-        }
+        private readonly decimal last;
+        public decimal LastPrice { get => last; }
+        
+        private readonly decimal high;
+        public decimal High24Price { get => high; }
 
-        public decimal LowPrice
-        {
-            get
-            {
-                return lowPrice != null ? (decimal)Convert.ToDouble(lowPrice.Replace(".", ",")) : -1;
-            }
-        }
+        private readonly decimal low;
+        public decimal Low24Price { get => low; }
 
-        public decimal Volume
-        {
-            get
-            {
-                return volume != null ? (decimal)Convert.ToDouble(volume.Replace(".", ",")) : -1;
-            }
-        }
+        private readonly decimal volume;
+        public decimal Volume24 { get => volume; }
 
-        public decimal VolumeWap
-        {
-            get
-            {
-                return volumeWap != null ? (decimal)Convert.ToDouble(volumeWap.Replace(".", ",")) : -1;
-            }
-        }
+        private readonly decimal vwap;
+        public decimal VolumeWap { get => vwap; }
 
-        public decimal MaximumBid
-        {
-            get
-            {
-                return maximumBid != null ? (decimal)Convert.ToDouble(maximumBid.Replace(".", ",")) : -1;
-            }
-        }
+        private readonly decimal max_bid;
+        public decimal Max24Bid { get => max_bid; }
 
-        public decimal MinimumAsk
-        {
-            get
-            {
-                return minimumAsk != null ? (decimal)Convert.ToDouble(minimumAsk.Replace(".", ",")) : -1;
-            }
-        }
+        private readonly decimal min_ask;
+        public decimal Min24Ask { get => min_ask; }
 
-        public decimal BestBid
-        {
-            get
-            {
-                return bestBid != null ? (decimal)Convert.ToDouble(bestBid.Replace(".", ",")) : -1;
-            }
-        }
+        private readonly decimal best_bid;
+        public decimal Best24Bid { get => best_bid; }
 
-        public decimal BestAsk
+        private readonly decimal best_ask;
+        public decimal Best24Ask { get => best_ask; }
+
+        [JsonConstructor]
+        public Ticker(string last,    string high,    string low,      string volume, string vwap, 
+                      string max_bid, string min_ask, string best_bid, string best_ask)
         {
-            get
-            {
-                return bestAsk != null ? (decimal)Convert.ToDouble(bestAsk.Replace(".", ",")) : -1;
-            }
+            decimal.TryParse(last, Any, InvariantCulture, out this.last);
+            decimal.TryParse(high, Any, InvariantCulture, out this.high);
+            decimal.TryParse(low, Any, InvariantCulture, out this.low);
+            decimal.TryParse(volume, Any, InvariantCulture, out this.volume);
+            decimal.TryParse(vwap, Any, InvariantCulture, out this.vwap);
+            decimal.TryParse(max_bid, Any, InvariantCulture, out this.max_bid);
+            decimal.TryParse(min_ask, Any, InvariantCulture, out this.min_ask);
+            decimal.TryParse(best_bid, Any, InvariantCulture, out this.best_bid);
+            decimal.TryParse(best_ask, Any, InvariantCulture, out this.best_ask);
         }
     }
 }
