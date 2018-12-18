@@ -69,7 +69,7 @@ namespace LivecoinWrapper
         /// returns general cryptocurrency information
         /// </summary>
         /// <returns>CoinsInfo</returns>
-        public async Task<CoinsInfo> ReturnoinsInfoAsync() =>
+        public async Task<CoinsInfo> ReturnCoinsInfoAsync() =>
                 await HttpGetAsync<CoinsInfo>(new CoinInfoRequest());
     }
 }

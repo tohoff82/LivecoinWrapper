@@ -141,7 +141,7 @@ namespace Test
         }
         private static void TestCoinInfo(LiveClientPublic client)
         {
-            var ci = client.ReturnoinsInfoAsync().Result;
+            var ci = client.ReturnCoinsInfoAsync().Result;
 
             WriteLine("Success --> " + ci.Success);
             WriteLine("MinimalOrderBTC --> " + ci.MinimalOrderBTC);
