@@ -24,8 +24,9 @@ namespace LivecoinWrapper.DataLayer.RequestData
         {
             switch (type)
             {
-                case exchange: Url = new StringBuilder(urlSegmentExchange).AppendFormat("{0}?{1}", method, arguments.ToKeyValueString()).ToString();
-                    break;
+                case exchange: Url = new StringBuilder(urlSegmentExchange)
+                        .AppendFormat("{0}?{1}", method, arguments.ToKeyValueString())
+                        .ToString(); break;
                 case exchangeAuth:
                     break;
                 case payment:
