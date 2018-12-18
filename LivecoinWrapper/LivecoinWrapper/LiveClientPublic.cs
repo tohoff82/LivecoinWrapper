@@ -1,8 +1,9 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+using LivecoinWrapper.DataLayer.ReciveData;
 using LivecoinWrapper.DataLayer.RequestData;
+
+using static LivecoinWrapper.DataLayer.OrderType;
 
 namespace LivecoinWrapper
 {
@@ -16,7 +17,28 @@ namespace LivecoinWrapper
         /// <typeparam name="T"> Ticker or List(Ticker) </typeparam>
         /// <param name="pairId">allPair or concret pair </param>
         /// <returns>Ticker or List(Ticker)</returns>
-        public async Task<T> GetTickerAsync<T>(string pairId) =>
+        public async Task<T> ReturnTickerAsync<T>(string pairId) =>
                 await HttpGetAsync<T>(new TickerRequest(pairId));
+
+        /// <summary>
+        /// Get information about the latest transactions (transactions) for a given currency pair.
+        /// Information can be obtained either in the last hour or in the last minute.
+        /// </summary>
+        /// <param name="pairId">Required currency pair identifier</param>
+        /// <param name="minOrHour">Optional, if true - information is returned in the last minute, if false - last hour</param>
+        /// <param name="orderType">Defoult - false, Possible values: BUY or SELL</param>
+        /// <returns>List PublicTrade </returns>
+        public async Task<List<PublicTrade>> ReturnTradeHistoryAsync(string pairId, bool minOrHour = false, string orderType = defoult) =>
+                await HttpGetAsync<List<PublicTrade>>(new TradeHistoryRequest(pairId, minOrHour, orderType));
+
+        /// <summary>
+        /// Get orders for the selected pair (you can set a sign of grouping orders by price)
+        /// </summary>
+        /// <param name="pairId">Required currency pair identifier</param>
+        /// <param name="groupByPrice">true - grouping orders by price</param>
+        /// <param name="depth">The maximum number of bids (ask) in the answer. If null - maxValue</param>
+        /// <returns>OrderBook object</returns>
+        public async Task<OrderBook> ReturnOrderBookAsync(string pairId, bool groupByPrice = false, ushort? depth = null) =>
+                await HttpGetAsync<OrderBook>(new OrderBookRequest(pairId, groupByPrice, depth));
     }
 }
