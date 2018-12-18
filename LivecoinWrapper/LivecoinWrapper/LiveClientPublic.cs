@@ -64,5 +64,12 @@ namespace LivecoinWrapper
         /// <returns>Restrictions object</returns>
         public async Task<Restrictions> ReturnRestrictionsAsync() =>
                 await HttpGetAsync<Restrictions>(new RestrictionRequest());
+
+        /// <summary>
+        /// returns general cryptocurrency information
+        /// </summary>
+        /// <returns>CoinsInfo</returns>
+        public async Task<CoinsInfo> ReturnoinsInfoAsync() =>
+                await HttpGetAsync<CoinsInfo>(new CoinInfoRequest());
     }
 }
