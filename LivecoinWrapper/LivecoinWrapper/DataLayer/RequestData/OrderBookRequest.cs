@@ -18,5 +18,16 @@ namespace LivecoinWrapper.DataLayer.RequestData
 
             GenerateRequest(exchange, "order_book");
         }
+
+        public OrderBookRequest(bool groupByPrice, byte depth) : base()
+        {
+            arguments = new Dictionary<string, string>
+            {
+                ["groupByPrice"] = groupByPrice.ToString(),
+                ["depth"] = depth.ToString()
+            };
+
+            GenerateRequest(exchange, "all/order_book");
+        }
     }
 }
