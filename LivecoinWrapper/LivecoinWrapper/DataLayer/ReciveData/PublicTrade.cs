@@ -1,45 +1,38 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
+using static System.Globalization.CultureInfo;
+using static System.Globalization.NumberStyles;
 
 namespace LivecoinWrapper.DataLayer.ReciveData
 {
     public class PublicTrade
     {
         [JsonProperty("time")]
-        public ulong Time { get; set; }
+        public ulong Time { get; private set; }
 
         [JsonProperty("id")]
-        public ulong Id { get; set; }
-
-        [JsonProperty("price")]
-        private readonly string price;
-
-        [JsonProperty("quantity")]
-        private readonly string quantity;
+        public ulong Id { get; private set; }
+        
+        private readonly decimal price;
+        public  decimal Price { get => price; }
+        
+        private readonly decimal quantity;
+        public decimal Quantity { get => quantity; }
 
         [JsonProperty("type")]
-        public string OrderType { get; set; }
+        public string OrderType { get; private set; }
 
-       
-        //Сделал эти костыли по причине того, что иногда в ответе цена представлена
-        //строкой в таком виде -->  1.4E-4 по другому как распарсить пока не придумал
+        [JsonProperty("orderBuyId")]
+        public ulong OrderBuyId { get; private set; }
 
-        public decimal Price
+        [JsonProperty("orderSellId")]
+        public ulong OrderSellId { get; private set; }
+
+        [JsonConstructor]
+        public PublicTrade(string price, string quantity)
         {
-            get
-            {
-                return price != null ? (decimal)Convert.ToDouble(price.Replace(".",",")) : -1;
-            }
-        }
-
-        public decimal Quantity
-        {
-            get
-            {
-                return quantity != null ? (decimal)Convert.ToDouble(quantity.Replace(".", ",")) : -1;
-            }
+            decimal.TryParse(price, Any, InvariantCulture, out this.price);
+            decimal.TryParse(quantity, Any, InvariantCulture, out this.quantity);
         }
     }
 }
