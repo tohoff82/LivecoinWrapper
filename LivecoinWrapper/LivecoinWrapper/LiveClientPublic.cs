@@ -49,5 +49,13 @@ namespace LivecoinWrapper
         /// <returns>Dictionary(string, OrderBook)</returns>
         public async Task<Dictionary<string, OrderBook>> ReturnOrderBookAsync(bool groupByPrice = false, byte depth = 10) =>
                 await HttpGetAsync<Dictionary<string, OrderBook>>(new OrderBookRequest(groupByPrice, depth));
+
+        /// <summary>
+        /// Returns the maximum bid and minimum ask in the current(optional) glass
+        /// </summary>
+        /// <param name="pairId">Optional, currency pair identifier</param>
+        /// <returns>MaxBidMinAsk object</returns>
+        public async Task<MaxBidMinAsk> ReturnMaxBidMinAskAsync(string pairId = null) =>
+                await HttpGetAsync<MaxBidMinAsk>(new MaxBidMinAskRequest(pairId));
     }
 }
