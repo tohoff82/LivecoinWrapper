@@ -1,50 +1,44 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+
+using static System.Globalization.CultureInfo;
+using static System.Globalization.NumberStyles;
 
 namespace LivecoinWrapper.DataLayer.ReciveData
 {
     public class Restrictions
     {
         [JsonProperty("success")]
-        public bool Success { get; set; }
+        public bool Success { get; private set; }
 
-        [JsonProperty("minBtcVolume")]
-        private readonly string minBtcVolume;
+        private readonly decimal minBtcVolume;
+        public decimal MinBtcVolume { get => minBtcVolume; }
 
         [JsonProperty("restrictions")]
-        public List<Restriction> RestrictionList { get; set; }
+        public List<Restriction> RestrictionList { get; private set; }
 
-
-        //Сделал эти костыли по причине того, что иногда в ответе цена представлена
-        //строкой в таком виде -->  1.4E-4 по другому как распарсить пока не придумал
-
-        public decimal MinBtcVolume
+        [JsonConstructor]
+        public Restrictions(string minBtcVolume)
         {
-            get
-            {
-                return minBtcVolume != null ? (decimal)Convert.ToDouble(minBtcVolume.Replace(".", ",")) : -1;
-            }
+            decimal.TryParse(minBtcVolume, Any, InvariantCulture, out this.minBtcVolume);
         }
     }
 
     public class Restriction
     {
         [JsonProperty("currencyPair")]
-        public string CurrencyPair { get; set; }
+        public string CurrencyPair { get; private set; }
 
         [JsonProperty("priceScale")]
-        public byte PriceScale { get; set; }
+        public byte PriceScale { get; private set; }
+        
+        private readonly decimal minLimitQuantity;
+        public decimal MinLimitQuantity { get => minLimitQuantity; }
 
-        [JsonProperty("minLimitQuantity")]
-        private readonly string minLimitQuantity;
-
-        public decimal MinLimitQuantity
+        [JsonConstructor]
+        public Restriction(string minLimitQuantity)
         {
-            get
-            {
-                return minLimitQuantity != null ? (decimal)Convert.ToDouble(minLimitQuantity.Replace(".", ",")) : -1;
-            }
+            decimal.TryParse(minLimitQuantity, Any, InvariantCulture, out this.minLimitQuantity);
         }
     }
 }
