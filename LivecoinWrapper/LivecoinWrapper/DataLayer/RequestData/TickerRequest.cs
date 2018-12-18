@@ -9,12 +9,9 @@ namespace LivecoinWrapper.DataLayer.RequestData
     {
         public TickerRequest(string pairId): base()
         {
-            if (pairId != allPair)
-                arguments = new Dictionary<string, string>
-                {
-                    ["currencyPair"] = pairId
-                };
-            else arguments = new Dictionary<string, string>();
+            arguments = new Dictionary<string, string>();
+
+            if (pairId != allPair) arguments.Add("currencyPair", pairId);
 
             GenerateRequest(exchange, "ticker");
         }
