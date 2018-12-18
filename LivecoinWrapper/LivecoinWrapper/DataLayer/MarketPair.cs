@@ -6,10 +6,14 @@ namespace LivecoinWrapper.DataLayer
 {
     public static class MarketPair
     {
-        public static string BtcUsd { get; } = "BTC/USD";
-        public static string EmcBtc { get; } = "EMC/BTC";
-        public static string EmcUsd { get; } = "EMC/USD";
-        public static string WgrBtc { get; } = "WGR/BTC";
-        public static string CvcEth { get; } = "CVC/ETH";
+        public const string allPair = "all";
+
+        public const string btc_usd = "BTC/USD";
+        public const string emc_btc = "EMC/BTC";
+        public const string emc_usd = "EMC/USD";
+        public const string wgr_btc = "WGR/BTC";
+
+        public const string snb_btc = "SNBL/BTC";
+        public const string bzx_eth = "BZX/ETH";
     }
 }
