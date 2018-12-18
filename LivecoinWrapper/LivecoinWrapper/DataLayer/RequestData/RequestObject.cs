@@ -20,6 +20,13 @@ namespace LivecoinWrapper.DataLayer.RequestData
 
         internal string Url { get; private set; }
 
+        public RequestObject() { }
+
+        public RequestObject(string apiKey, string apiSec)
+        {
+
+        }
+
         protected void GenerateRequest(RequestType type, string method)
         {
             switch (type)
@@ -31,7 +38,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
                     break;
                 case payment:
                     break;
-                case info:
+                case info: Url = new StringBuilder(urlSegmentInfo).Append(method).ToString();
                     break;
                 //default:
                 //    break;
