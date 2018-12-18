@@ -40,5 +40,14 @@ namespace LivecoinWrapper
         /// <returns>OrderBook object</returns>
         public async Task<OrderBook> ReturnOrderBookAsync(string pairId, bool groupByPrice = false, ushort? depth = null) =>
                 await HttpGetAsync<OrderBook>(new OrderBookRequest(pairId, groupByPrice, depth));
+
+        /// <summary>
+        /// Returns an orderbook for each currency pair
+        /// </summary>
+        /// <param name="groupByPrice">true - grouping orders by price</param>
+        /// <param name="depth">The maximum number of bids (ask) in the answer. 10 - maxValue</param>
+        /// <returns>Dictionary(string, OrderBook)</returns>
+        public async Task<Dictionary<string, OrderBook>> ReturnOrderBookAsync(bool groupByPrice = false, byte depth = 10) =>
+                await HttpGetAsync<Dictionary<string, OrderBook>>(new OrderBookRequest(groupByPrice, depth));
     }
 }
