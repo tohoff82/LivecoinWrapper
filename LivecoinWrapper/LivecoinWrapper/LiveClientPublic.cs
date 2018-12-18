@@ -57,5 +57,12 @@ namespace LivecoinWrapper
         /// <returns>MaxBidMinAsk object</returns>
         public async Task<MaxBidMinAsk> ReturnMaxBidMinAskAsync(string pairId = null) =>
                 await HttpGetAsync<MaxBidMinAsk>(new MaxBidMinAskRequest(pairId));
+
+        /// <summary>
+        /// Returns restrictions for each pair of min. order size and the maximum number of decimal places in the price
+        /// </summary>
+        /// <returns>Restrictions object</returns>
+        public async Task<Restrictions> ReturnRestrictionsAsync() =>
+                await HttpGetAsync<Restrictions>(new RestrictionRequest());
     }
 }
