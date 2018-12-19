@@ -1,62 +1,42 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
+using static System.Globalization.CultureInfo;
+using static System.Globalization.NumberStyles;
 
 namespace LivecoinWrapper.DataLayer.ReciveData
 {
     public class PrivateTrade
     {
-        [JsonProperty("time")]
-        public ulong Time { get; set; }
+        [JsonProperty("datetime")]
+        public ulong Time { get; private set; }
 
         [JsonProperty("id")]
-        public ulong Id { get; set; }
+        public ulong Id { get; private set; }
 
         [JsonProperty("type")]
         public string OrderType;
 
         [JsonProperty("symbol")]
-        public string MarketPair;
-
-        [JsonProperty("price")]
-        private readonly string price;
-
-        [JsonProperty("quantity")]
-        private readonly string quantity;
-
-        [JsonProperty("commission")]
-        private readonly string commission;
+        public string Symbol;
+        
+        private readonly decimal price;
+        public decimal Price { get => price; }
+        
+        private readonly decimal quantity;
+        public decimal Quantity { get => quantity; }
+        
+        private readonly decimal commission;
+        public decimal Commission { get => commission; }
 
         [JsonProperty("clientorderid")]
         public ulong ClientOrderId;
 
-
-        //Сделал эти костыли по причине того, что иногда в ответе цена равна нулл или представлена
-        //строкой в таком виде -->  1.4E-4 по другому как распарсить пока не придумал
-
-        public decimal Price
+        [JsonConstructor]
+        public PrivateTrade(string price, string quantity, string commission)
         {
-            get
-            {
-                return price != null ? (decimal)Convert.ToDouble(price.Replace(".", ",")) : -1;
-            }
-        }
-
-        public decimal Quantity
-        {
-            get
-            {
-                return quantity != null ? (decimal)Convert.ToDouble(quantity.Replace(".", ",")) : -1;
-            }
-        }
-
-        public decimal Commission
-        {
-            get
-            {
-                return quantity != null ? (decimal)Convert.ToDouble(commission.Replace(".", ",")) : -1;
-            }
+            decimal.TryParse(price, Any, InvariantCulture, out this.price);
+            decimal.TryParse(quantity, Any, InvariantCulture, out this.quantity);
+            decimal.TryParse(commission, Any, InvariantCulture, out this.commission);
         }
     }
 }
