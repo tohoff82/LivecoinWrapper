@@ -8,9 +8,9 @@ namespace LivecoinWrapper.DataLayer.RequestData
     {
         public RestrictionRequest() : base()
         {
-            arguments = new Dictionary<string, string>();
+            arguments = new SortedDictionary<string, string>();
 
-            GenerateRequest(exchange, "restrictions");
+            GenerateRequest(exchangeGET, "restrictions");
         }
     }
 }
