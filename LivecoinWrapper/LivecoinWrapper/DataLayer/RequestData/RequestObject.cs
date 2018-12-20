@@ -12,39 +12,54 @@ namespace LivecoinWrapper.DataLayer.RequestData
 {
     public abstract class RequestObject
     {
-        protected const string urlSegmentExchange = "/exchange/";
-        protected const string urlSegmentPayment  = "/payment/";
-        protected const string urlSegmentInfo     = "/info/";
+        private readonly string apiSec;
 
-        internal Dictionary<string, string> arguments;
+        private const string urlSegmentExchange = "/exchange/";
+        private const string urlSegmentPayment  = "/payment/";
+        private const string urlSegmentInfo     = "/info/";
+
+        internal SortedDictionary<string, string> arguments;
 
         internal string Url { get; private set; }
+        internal string Sign { get; private set; }
 
         public RequestObject() { }
 
-        public RequestObject(string apiKey, string apiSec)
+        public RequestObject(string apiSec)
         {
-
+            this.apiSec = apiSec;
         }
 
         protected void GenerateRequest(RequestType type, string method)
         {
-            switch (type)
+            if (type == exchangeGET) Url = new StringBuilder(urlSegmentExchange)
+                    .AppendFormat("{0}?{1}", method, arguments.ToKeyValueString()).ToString();
+
+            if (type == exchangeAuthGET)
             {
-                case exchange: Url = new StringBuilder(urlSegmentExchange)
-                        .AppendFormat("{0}?{1}", method, arguments.ToKeyValueString())
-                        .ToString(); break;
-                case exchangeAuth:
-                    break;
-                case payment:
-                    break;
-                case info: Url = new StringBuilder(urlSegmentInfo).Append(method).ToString();
-                    break;
-                //default:
-                //    break;
+                Url = new StringBuilder(urlSegmentExchange)
+                    .AppendFormat("{0}?{1}", method, arguments.ToKeyValueString()).ToString();
+                CreateSignature();
             }
+
+            if (type == exchangeAuthPOST)
+            {
+                Url = new StringBuilder(urlSegmentExchange).Append(method).ToString();
+                CreateSignature();
+            }
+
+            if (type == paymentGET) { /*todo*/ }
+            if (type == paymentPOST) { /*todo*/ }
+
+            if (type == infoGET) Url = new StringBuilder(urlSegmentInfo).Append(method).ToString();            
         }
 
+        private void CreateSignature()
+        {
+            var encryptor = new HMACSHA256(Encoding.ASCII.GetBytes(apiSec));
+            byte[] postBytes = Encoding.ASCII.GetBytes(arguments.ToKeyValueString());
 
+            Sign = BitConverter.ToString(encryptor.ComputeHash(postBytes)).Replace("-", "").ToUpper();
+        }
     }
 }
