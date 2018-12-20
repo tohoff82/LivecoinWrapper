@@ -8,11 +8,11 @@ namespace LivecoinWrapper.DataLayer.RequestData
     {
         public MaxBidMinAskRequest(string pairId) : base()
         {
-            arguments = new Dictionary<string, string>();
+            arguments = new SortedDictionary<string, string>();
 
             if (pairId != null) arguments.Add("currencyPair", pairId);
 
-            GenerateRequest(exchange, "maxbid_minask");
+            GenerateRequest(exchangeGET, "maxbid_minask");
         }
     }
 }
