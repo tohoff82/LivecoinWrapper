@@ -8,7 +8,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
     {
         public OrderBookRequest(string pairId, bool groupByPrice, ushort? depth) : base()
         {
-            arguments = new Dictionary<string, string>
+            arguments = new SortedDictionary<string, string>
             {
                 ["currencyPair"] = pairId,
                 ["groupByPrice"] = groupByPrice.ToString()
@@ -16,18 +16,18 @@ namespace LivecoinWrapper.DataLayer.RequestData
 
             if (depth != null) arguments.Add("depth", depth.ToString());
 
-            GenerateRequest(exchange, "order_book");
+            GenerateRequest(exchangeGET, "order_book");
         }
 
         public OrderBookRequest(bool groupByPrice, byte depth) : base()
         {
-            arguments = new Dictionary<string, string>
+            arguments = new SortedDictionary<string, string>
             {
                 ["groupByPrice"] = groupByPrice.ToString(),
                 ["depth"] = depth.ToString()
             };
 
-            GenerateRequest(exchange, "all/order_book");
+            GenerateRequest(exchangeGET, "all/order_book");
         }
     }
 }
