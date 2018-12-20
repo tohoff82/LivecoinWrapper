@@ -9,7 +9,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
     {
         public TradeHistoryRequest(string pairId, bool minOrHour, string orderType) : base()
         {
-            arguments = new Dictionary<string, string>
+            arguments = new SortedDictionary<string, string>
             {
                 ["currencyPair"]  = pairId,
                 ["minutesOrHour"] = minOrHour.ToString()
@@ -17,7 +17,21 @@ namespace LivecoinWrapper.DataLayer.RequestData
 
             if (orderType != defoult) arguments.Add("type", orderType);
 
-            GenerateRequest(exchange, "last_trades");
+            GenerateRequest(exchangeGET, "last_trades");
+        }
+
+        public TradeHistoryRequest(string apiSec, string pairId, bool orderDesc, ushort limit, ushort offset) : base(apiSec)
+        {
+            arguments = new SortedDictionary<string, string>
+            {
+                ["orderDesc"] = orderDesc.ToString(),
+                ["limit"]     = limit.ToString(),
+                ["offset"]    = offset.ToString()
+            };
+
+            if (pairId != null) arguments.Add("currencyPair", pairId);
+
+            GenerateRequest(exchangeAuthGET, "trades");
         }
     }
 }
