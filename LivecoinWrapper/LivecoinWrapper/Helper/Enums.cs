@@ -2,7 +2,15 @@
 {
     public class Enums
     {
-        public enum RequestType { exchange, exchangeAuth, payment, info}
+        public enum SegmentType
+        {
+            exchangeGET,
+            exchangeAuthGET,
+            exchangeAuthPOST,
+            paymentGET,
+            paymentPOST,
+            infoGET
+        }
 
         public enum WalletStatus
         {
