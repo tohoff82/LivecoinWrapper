@@ -31,12 +31,16 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         [JsonProperty("clientorderid")]
         public ulong ClientOrderId;
 
+        private readonly decimal bonus;
+        public decimal Bonus { get => bonus; }
+
         [JsonConstructor]
-        public PrivateTrade(string price, string quantity, string commission)
+        public PrivateTrade(string price, string quantity, string commission, string bonus)
         {
             decimal.TryParse(price, Any, InvariantCulture, out this.price);
             decimal.TryParse(quantity, Any, InvariantCulture, out this.quantity);
             decimal.TryParse(commission, Any, InvariantCulture, out this.commission);
+            decimal.TryParse(bonus, Any, InvariantCulture, out this.bonus);
         }
     }
 }
