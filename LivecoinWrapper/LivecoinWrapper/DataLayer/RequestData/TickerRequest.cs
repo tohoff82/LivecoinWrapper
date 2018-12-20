@@ -9,11 +9,11 @@ namespace LivecoinWrapper.DataLayer.RequestData
     {
         public TickerRequest(string pairId): base()
         {
-            arguments = new Dictionary<string, string>();
+            arguments = new SortedDictionary<string, string>();
 
             if (pairId != allPair) arguments.Add("currencyPair", pairId);
 
-            GenerateRequest(exchange, "ticker");
+            GenerateRequest(exchangeGET, "ticker");
         }
     }
 }
