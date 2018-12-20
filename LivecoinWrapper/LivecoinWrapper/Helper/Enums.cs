@@ -2,7 +2,7 @@
 {
     public class Enums
     {
-        public enum SegmentType
+        public enum RequestType
         {
             exchangeGET,
             exchangeAuthGET,
