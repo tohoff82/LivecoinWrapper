@@ -23,5 +23,15 @@
             closed_cashin,      //Only output allowed
             closed_cashout      //Only input is allowed
         }
+
+        public enum OrderType
+        {
+            all,                //all orders
+            open,               //open orders
+            closed,             //closed orders
+            cancelled,          //cancelled orders
+            not_cancelled,      //all orders except canceled
+            partially           //partially executed orders
+        }
     }
 }
