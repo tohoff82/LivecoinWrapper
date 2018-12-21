@@ -24,14 +24,15 @@
             closed_cashout      //Only input is allowed
         }
 
-        public enum OrderType
+        public enum OrderStatus
         {
-            all,                //all orders
-            open,               //open orders
-            closed,             //closed orders
-            cancelled,          //cancelled orders
-            not_cancelled,      //all orders except canceled
-            partially           //partially executed orders
+            ALL,                //all orders
+            OPEN,               //open orders
+            CLOSED,             //closed orders
+            CANCELLED,          //cancelled orders
+            NOT_CANCELLED,      //all orders except canceled
+            PARTIALLY,           //partially executed orders
+            EXECUTED
         }
     }
 }
