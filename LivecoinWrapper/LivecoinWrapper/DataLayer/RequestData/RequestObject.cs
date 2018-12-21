@@ -56,7 +56,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
 
         private void CreateSignature()
         {
-            var encryptor = new HMACSHA256(Encoding.ASCII.GetBytes(apiSec));
+            var encryptor    = new HMACSHA256(Encoding.ASCII.GetBytes(apiSec));
             byte[] postBytes = Encoding.ASCII.GetBytes(arguments.ToKeyValueString());
 
             Sign = BitConverter.ToString(encryptor.ComputeHash(postBytes)).Replace("-", "").ToUpper();
