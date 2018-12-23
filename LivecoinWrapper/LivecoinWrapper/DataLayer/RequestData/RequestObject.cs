@@ -32,26 +32,26 @@ namespace LivecoinWrapper.DataLayer.RequestData
 
         protected void GenerateRequest(RequestType type, string method)
         {
-            if (type == exchangeGET) Url = new StringBuilder(urlSegmentExchange)
+            if (type == exchange_GET) Url = new StringBuilder(urlSegmentExchange)
                     .AppendFormat("{0}?{1}", method, arguments.ToKeyValueString()).ToString();
 
-            if (type == exchangeAuthGET)
+            if (type == exchangeAuth_GET)
             {
                 Url = new StringBuilder(urlSegmentExchange)
                     .AppendFormat("{0}?{1}", method, arguments.ToKeyValueString()).ToString();
                 CreateSignature();
             }
 
-            if (type == exchangeAuthPOST)
+            if (type == exchangeAuth_POST)
             {
                 Url = new StringBuilder(urlSegmentExchange).Append(method).ToString();
                 CreateSignature();
             }
 
-            if (type == paymentGET) { /*todo*/ }
-            if (type == paymentPOST) { /*todo*/ }
+            if (type == payment_GET) { /*todo*/ }
+            if (type == payment_POST) { /*todo*/ }
 
-            if (type == infoGET) Url = new StringBuilder(urlSegmentInfo).Append(method).ToString();            
+            if (type == info_GET) Url = new StringBuilder(urlSegmentInfo).Append(method).ToString();            
         }
 
         private void CreateSignature()
