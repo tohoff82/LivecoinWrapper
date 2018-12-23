@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using LivecoinWrapper.DataLayer.RequestData;
 using LivecoinWrapper.Helper;
-using System.Text;
+using LivecoinWrapper.DataLayer.RequestData;
+using LivecoinWrapper.DataLayer.ExceptionData;
 
 namespace LivecoinWrapper
 {
@@ -31,11 +32,9 @@ namespace LivecoinWrapper
 
             var response = await httpClient.GetAsync(requestObj.Url).ConfigureAwait(false);
 
-            //response.EnsureSuccessStatusCode();         // throw if web request failed
+            CheckException(response);
 
-            string json = await response.Content.ReadAsStringAsync();
-
-            return await Task.Run(() => JsonConvert.DeserializeObject<T>(json));
+            return await UnpackingResponseAsync<T>(response);
         }
 
         protected async Task<T> HttpPostAsync<T>(RequestObject requestObj)
@@ -46,11 +45,24 @@ namespace LivecoinWrapper
                 new StringContent(requestObj.arguments.ToKeyValueString(),
                     Encoding.UTF8, "application/x-www-form-urlencoded")).ConfigureAwait(false);
 
-            //response.EnsureSuccessStatusCode();         // throw if web request failed
+            CheckException(response);
 
-            string json = await response.Content.ReadAsStringAsync();
+            return await UnpackingResponseAsync<T>(response);
+        }
 
+        private  async Task<T> UnpackingResponseAsync<T>(HttpResponseMessage responseMessage)
+        {
+            string json = await responseMessage.Content.ReadAsStringAsync();
             return await Task.Run(() => JsonConvert.DeserializeObject<T>(json));
+        }
+
+        private void CheckException(HttpResponseMessage responseMessage)
+        {
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                var error = UnpackingResponseAsync<Error>(responseMessage).Result;
+                throw new LiveException(error.Message);
+            }
         }
 
         public void Dispose() => httpClient.Dispose();
