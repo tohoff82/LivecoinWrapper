@@ -38,7 +38,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
             if (type == exchangeAuth_GET)
             {
                 Url = new StringBuilder(urlSegmentExchange)
-                    .AppendFormat("{0}?{1}", method, arguments.ToKeyValueString()).ToString();
+                        .AppendFormat("{0}?{1}", method, arguments.ToKeyValueString()).ToString();
                 CreateSignature();
             }
 
@@ -48,7 +48,12 @@ namespace LivecoinWrapper.DataLayer.RequestData
                 CreateSignature();
             }
 
-            if (type == payment_GET) { /*todo*/ }
+            if (type == payment_GET)
+            {
+                Url = new StringBuilder(urlSegmentPayment)
+                        .AppendFormat("{0}?{1}", method, arguments.ToKeyValueString()).ToString();
+                CreateSignature();
+            }
             if (type == payment_POST) { /*todo*/ }
 
             if (type == info_GET) Url = new StringBuilder(urlSegmentInfo).Append(method).ToString();            
