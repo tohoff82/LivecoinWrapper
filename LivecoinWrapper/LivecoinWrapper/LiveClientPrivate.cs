@@ -13,6 +13,7 @@ using System.IO;
 using LivecoinWrapper.DataLayer.ExceptionData;
 using static LivecoinWrapper.Helper.Enums;
 using static LivecoinWrapper.Helper.Enums.OrdStatus;
+using static LivecoinWrapper.Helper.Enums.TransactionsType;
 
 namespace LivecoinWrapper
 {
@@ -67,5 +68,17 @@ namespace LivecoinWrapper
         /// <returns>List of Balance</returns>
         public async Task<List<Balance>> ReturnBalancesAsync(string currencyId) =>
                 await HttpGetAsync<List<Balance>>(new BalancesRequest(apiSec, currencyId));
+
+        /// <summary>
+        /// Returns a list of user transactions
+        /// </summary>
+        /// <param name="startTime">Required, sample start date (in UNIX Time format in milliseconds)</param>
+        /// <param name="endTime">Required, sample end date (in UNIX Time format in milliseconds)</param>
+        /// <param name="transType">Types of transactions (Enums.TransactionsType)</param>
+        /// <param name="resLimit">Maximum number of results</param>
+        /// <param name="offset">First record index</param>
+        /// <returns>List of Transaction</returns>
+        public async Task<List<Transaction>> ReturnTransactionAsync(ulong startTime, ulong endTime, TransactionsType transType = all, ushort resLimit = 100, ushort offset = 0) =>
+                await HttpGetAsync<List<Transaction>>(new TransactionsRequest(apiSec, startTime, endTime, transType.ToString(), resLimit, offset));
     }
 }
