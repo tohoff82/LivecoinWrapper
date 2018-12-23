@@ -6,14 +6,14 @@ namespace LivecoinWrapper.DataLayer.RequestData
 {
     public class BalancesRequest : RequestObject
     {
-        public BalancesRequest(string apiSec, string currencyIds) : base(apiSec)
+        public BalancesRequest(string apiSec, string currencyId) : base(apiSec)
         {
             arguments = new SortedDictionary<string, string>
             {
-                ["currency"] = currencyIds
+                ["currency"] = currencyId
             };
 
-            GenerateRequest(exchangeAuth_GET, "balances");
+            GenerateRequest(payment_GET, "balances");
         }
     }
 }
