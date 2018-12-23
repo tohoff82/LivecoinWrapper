@@ -4,12 +4,12 @@
     {
         public enum RequestType
         {
-            exchangeGET,
-            exchangeAuthGET,
-            exchangeAuthPOST,
-            paymentGET,
-            paymentPOST,
-            infoGET
+            exchange_GET,
+            exchangeAuth_GET,
+            exchangeAuth_POST,
+            payment_GET,
+            payment_POST,
+            info_GET
         }
 
         public enum WalletStatus
@@ -33,6 +33,14 @@
             NOT_CANCELLED,      //all orders except canceled
             PARTIALLY,           //partially executed orders
             EXECUTED
+        }
+
+        public enum Orderype
+        {
+            LIMIT_BUY,
+            LIMIT_SELL,
+            MARKET_BUY,
+            MARKET_SELL
         }
     }
 }
