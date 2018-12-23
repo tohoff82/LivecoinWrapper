@@ -84,8 +84,9 @@ namespace LivecoinWrapper
         /// <summary>
         /// Returns the current user commission
         /// </summary>
-        /// <returns>Fee</returns>
-        public async Task<Fee> ReturnFeeSync() =>
-                await HttpGetAsync<Fee>(new FeeRequest(apiSec));
+        /// <param name="info">if true answer add MonthlyUSDVolume field</param>
+        /// <returns>FeeInfo</returns>
+        public async Task<FeeInfo> ReturnFeeInfoAsync(bool info = true) =>
+                await HttpGetAsync<FeeInfo>(new FeeRequest(apiSec, info));
     }
 }
