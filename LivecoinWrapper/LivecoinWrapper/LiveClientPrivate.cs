@@ -80,5 +80,12 @@ namespace LivecoinWrapper
         /// <returns>List of Transaction</returns>
         public async Task<List<Transaction>> ReturnTransactionAsync(ulong startTime, ulong endTime, TransactionsType transType = all, ushort resLimit = 100, ushort offset = 0) =>
                 await HttpGetAsync<List<Transaction>>(new TransactionsRequest(apiSec, startTime, endTime, transType.ToString(), resLimit, offset));
+
+        /// <summary>
+        /// Returns the current user commission
+        /// </summary>
+        /// <returns>Fee</returns>
+        public async Task<Fee> ReturnFeeSync() =>
+                await HttpGetAsync<Fee>(new FeeRequest(apiSec));
     }
 }
