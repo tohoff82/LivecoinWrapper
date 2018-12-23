@@ -17,7 +17,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
 
             if (orderType != defoult) arguments.Add("type", orderType);
 
-            GenerateRequest(exchangeGET, "last_trades");
+            GenerateRequest(exchange_GET, "last_trades");
         }
 
         public TradeHistoryRequest(string apiSec, string pairId, bool orderDesc, ushort limit, ushort offset) : base(apiSec)
@@ -31,7 +31,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
 
             if (pairId != null) arguments.Add("currencyPair", pairId);
 
-            GenerateRequest(exchangeAuthGET, "trades");
+            GenerateRequest(exchangeAuth_GET, "trades");
         }
     }
 }
