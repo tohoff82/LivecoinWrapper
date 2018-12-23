@@ -52,6 +52,12 @@ namespace LivecoinWrapper
                                                     ulong? issuedTo = null, uint startRow = 0,        uint endRow = 2147483646) =>
                 await HttpGetAsync<Orders>(new OrdersRequest(apiSec, pairId, status.ToString(), issuedFrom, issuedTo, startRow, endRow));
 
-
+        /// <summary>
+        /// Get information about the order by its ID
+        /// </summary>
+        /// <param name="orderId">The currency pair identifierparam>
+        /// <returns>OrderInfo</returns>
+        public async Task<OrderInfo> ReturnOrderInfoById(ulong orderId) =>
+                await HttpGetAsync<OrderInfo>(new OrderInfoRequest(apiSec, orderId));
     }
 }
