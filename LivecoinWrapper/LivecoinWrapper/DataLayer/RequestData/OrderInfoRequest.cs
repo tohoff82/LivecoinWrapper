@@ -6,7 +6,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
 {
     public class OrderInfoRequest : RequestObject
     {
-        public OrderInfoRequest(ulong orderId) : base()
+        public OrderInfoRequest(string apiSec, ulong orderId) : base(apiSec)
         {
             arguments = new SortedDictionary<string, string>
             {
