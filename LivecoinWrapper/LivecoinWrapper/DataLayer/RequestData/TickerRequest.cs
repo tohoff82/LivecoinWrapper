@@ -13,7 +13,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
 
             if (pairId != allPair) arguments.Add("currencyPair", pairId);
 
-            GenerateRequest(exchangeGET, "ticker");
+            GenerateRequest(exchange_GET, "ticker");
         }
     }
 }
