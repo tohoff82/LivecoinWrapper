@@ -1,6 +1,6 @@
 ﻿namespace LivecoinWrapper.DataLayer
 {
-    public static class MarketPair
+    public static class CurrencyPairId
     {
         public const string allPair = "all";
 
