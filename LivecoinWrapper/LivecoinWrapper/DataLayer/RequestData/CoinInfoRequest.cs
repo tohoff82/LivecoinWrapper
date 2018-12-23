@@ -6,7 +6,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
     {
         public CoinInfoRequest() : base()
         {
-            GenerateRequest(infoGET, "coinInfo");
+            GenerateRequest(info_GET, "coinInfo");
         }
     }
 }
