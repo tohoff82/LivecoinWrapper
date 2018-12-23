@@ -5,12 +5,15 @@ using System.Text;
 
 namespace LivecoinWrapper.DataLayer.ExceptionData
 {
-    class LivecoinMessageError
+    internal class Error
     {
+        [JsonProperty("success")]
+        public ushort Success { get; set; }
+
         [JsonProperty("errorCode")]
-        public long ErrorCode { get; set; }
+        public ushort Code { get; set; }
 
         [JsonProperty("errorMessage")]
-        public string ErrorMessage { get; set; }
+        public string Message { get; set; }
     }
 }
