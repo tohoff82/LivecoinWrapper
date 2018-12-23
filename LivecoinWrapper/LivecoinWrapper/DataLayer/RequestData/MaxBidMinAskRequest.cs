@@ -12,7 +12,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
 
             if (pairId != null) arguments.Add("currencyPair", pairId);
 
-            GenerateRequest(exchangeGET, "maxbid_minask");
+            GenerateRequest(exchange_GET, "maxbid_minask");
         }
     }
 }
