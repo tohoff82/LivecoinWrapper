@@ -50,5 +50,14 @@
             trade,                  //funds in open orders
             available_withdrawal    //funds available for withdrawal
         }
+
+        public enum TransactionsType
+        {
+            all,
+            BUY,
+            SELL,
+            DEPOSIT,
+            WITHDRAWAL
+        }
     }
 }
