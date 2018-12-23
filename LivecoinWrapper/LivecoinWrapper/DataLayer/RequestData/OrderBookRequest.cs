@@ -16,7 +16,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
 
             if (depth != null) arguments.Add("depth", depth.ToString());
 
-            GenerateRequest(exchangeGET, "order_book");
+            GenerateRequest(exchange_GET, "order_book");
         }
 
         public OrderBookRequest(bool groupByPrice, byte depth) : base()
@@ -27,7 +27,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
                 ["depth"] = depth.ToString()
             };
 
-            GenerateRequest(exchangeGET, "all/order_book");
+            GenerateRequest(exchange_GET, "all/order_book");
         }
     }
 }
