@@ -6,11 +6,12 @@ namespace LivecoinWrapper.DataLayer.RequestData
 {
     public class FeeRequest : RequestObject
     {
-        public FeeRequest(string apiSec) : base(apiSec)
+        public FeeRequest(string apiSec, bool info) : base(apiSec)
         {
             arguments = new SortedDictionary<string, string>();
 
-            GenerateRequest(exchangeAuth_GET, "commission");
+            if (info) GenerateRequest(exchangeAuth_GET, "commissionCommonInfo");
+            else GenerateRequest(exchangeAuth_GET, "commission");
         }
     }
 }
