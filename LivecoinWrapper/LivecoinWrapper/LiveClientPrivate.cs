@@ -55,9 +55,17 @@ namespace LivecoinWrapper
         /// <summary>
         /// Get information about the order by its ID
         /// </summary>
-        /// <param name="orderId">The currency pair identifierparam>
+        /// <param name="orderId">The currency pair identifier</param>
         /// <returns>OrderInfo</returns>
         public async Task<OrderInfo> ReturnOrderInfoById(ulong orderId) =>
                 await HttpGetAsync<OrderInfo>(new OrderInfoRequest(apiSec, orderId));
+
+        /// <summary>
+        /// Returns an array with user balances
+        /// </summary>
+        /// <param name="currencyId">The currency identifier, comma separated</param>
+        /// <returns>List of Balance</returns>
+        public async Task<List<Balance>> ReturnBalancesAsync(string currencyId) =>
+                await HttpGetAsync<List<Balance>>(new BalancesRequest(apiSec, currencyId));
     }
 }
