@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.IO;
 using LivecoinWrapper.DataLayer.ExceptionData;
+using static LivecoinWrapper.Helper.Enums;
+using static LivecoinWrapper.Helper.Enums.OrdStatus;
 
 namespace LivecoinWrapper
 {
@@ -33,5 +35,23 @@ namespace LivecoinWrapper
         /// <returns>List PrivateTrade</returns>
         public async Task<List<PrivateTrade>> ReturnTradeHistoryAsync(string pairId = null, bool orderDesc = true, ushort limit = 100, ushort offset = 0) =>
                 await HttpGetAsync<List<PrivateTrade>>(new TradeHistoryRequest(apiSec, pairId, orderDesc, limit, offset));
+
+        /// <summary>
+        /// For a specific client and for a specific currency pair, to obtain complete information about its orders, 
+        /// information can be limited: either only open or only closed orders.
+        /// Sampling in pairs should be done on your side
+        /// </summary>
+        /// <param name="pairId">The currency pair identifier. If not specified, all pairs will be returned.(Not working for a specific pair,  for API side)</param>
+        /// <param name="status">Order type (see enum OrdType)</param>
+        /// <param name="issuedFrom">Sample start date (in UNIX Time format in milliseconds) -- not working for API side</param>
+        /// <param name="issuedTo">Final sampling date (in UNIX Time format in milliseconds) -- not working for API side</param>
+        /// <param name="startRow">The sequence number of the first entry Default value: 0</param>
+        /// <param name="endRow">Sequence number of the last entry. The default value is 2147483646</param>
+        /// <returns>Orders</returns>
+        public async Task<Orders> ReturnOrdersAsync(string pairId   = null, OrdStatus status = ALL, ulong? issuedFrom = null,
+                                                    ulong? issuedTo = null, uint startRow = 0,        uint endRow = 2147483646) =>
+                await HttpGetAsync<Orders>(new OrdersRequest(apiSec, pairId, status.ToString(), issuedFrom, issuedTo, startRow, endRow));
+
+
     }
 }
