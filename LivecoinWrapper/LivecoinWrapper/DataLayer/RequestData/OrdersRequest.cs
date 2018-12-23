@@ -17,10 +17,10 @@ namespace LivecoinWrapper.DataLayer.RequestData
             };
 
             if (pairId != null)     arguments.Add("currencyPair", pairId);
-            if (issuedFrom != null) arguments.Add("issuedFrom", issuedFrom.ToString());
-            if (issuedTo != null)   arguments.Add("issuedTo", issuedTo.ToString());
+            if (issuedFrom != null) arguments.Add("issuedFrom",   issuedFrom.ToString());
+            if (issuedTo != null)   arguments.Add("issuedTo",     issuedTo.ToString());
 
-            GenerateRequest(exchangeAuthGET, "client_orders");
+            GenerateRequest(exchangeAuth_GET, "client_orders");
         }
     }
 }
