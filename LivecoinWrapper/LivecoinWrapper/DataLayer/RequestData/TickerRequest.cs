@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 using static LivecoinWrapper.Helper.Enums.RequestType;
-using static LivecoinWrapper.DataLayer.MarketPair;
+using static LivecoinWrapper.DataLayer.CurrencyPairId;
 
 namespace LivecoinWrapper.DataLayer.RequestData
 {
