@@ -24,7 +24,7 @@
             closed_cashout      //Only input is allowed
         }
 
-        public enum OrderStatus
+        public enum OrdStatus
         {
             ALL,                //all orders
             OPEN,               //open orders
@@ -35,7 +35,7 @@
             EXECUTED
         }
 
-        public enum Orderype
+        public enum OrdType
         {
             LIMIT_BUY,
             LIMIT_SELL,
