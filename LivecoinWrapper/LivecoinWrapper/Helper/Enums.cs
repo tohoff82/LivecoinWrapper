@@ -31,7 +31,7 @@
             CLOSED,             //closed orders
             CANCELLED,          //cancelled orders
             NOT_CANCELLED,      //all orders except canceled
-            PARTIALLY,           //partially executed orders
+            PARTIALLY,          //partially executed orders
             EXECUTED
         }
 
@@ -41,6 +41,14 @@
             LIMIT_SELL,
             MARKET_BUY,
             MARKET_SELL
+        }
+
+        public enum BalanceType
+        {
+            total,                  //total balance
+            available,              //funds available for trading
+            trade,                  //funds in open orders
+            available_withdrawal    //funds available for withdrawal
         }
     }
 }
