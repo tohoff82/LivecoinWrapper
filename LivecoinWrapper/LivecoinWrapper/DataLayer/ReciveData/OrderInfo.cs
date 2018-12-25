@@ -21,7 +21,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public OrdStatus OrdStatus { get; private set; }
 
         [JsonProperty("type")]
-        public OrdType OrdType { get; private set; }
+        public string OrdType { get; private set; }
 
         private readonly decimal price;
         public decimal Price { get => price; }
