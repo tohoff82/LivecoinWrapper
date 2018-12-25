@@ -7,23 +7,27 @@ using LivecoinWrapper.Helper;
 using LivecoinWrapper.DataLayer.RequestData;
 using LivecoinWrapper.DataLayer.ExceptionData;
 
+using static System.Environment;
+
 namespace LivecoinWrapper
 {
     public abstract class LiveClient : IDisposable
     {
-        private readonly HttpClient httpClient;
+        private HttpClient httpClient;
+        private delegate Task Action(HttpResponseMessage response);
+        private Action EnsureSuccessStatusCodeAsync;
 
-        private const string baseAddress = "https://api.livecoin.net";
-
-        public LiveClient()
-        {
-            httpClient = new HttpClient { BaseAddress = new Uri(baseAddress) };
-        }
-
+        public LiveClient() { Initialize(); }
         public LiveClient(string apiKey)
         {
-            httpClient = new HttpClient { BaseAddress = new Uri(baseAddress) };
+            Initialize();
             httpClient.DefaultRequestHeaders.Add("Api-key", apiKey);
+        }
+
+        private void Initialize()
+        {
+            httpClient = new HttpClient { BaseAddress = new Uri("https://api.livecoin.net") };
+            EnsureSuccessStatusCodeAsync = CheckExceptionAsync;
         }
 
         protected async Task<T> HttpGetAsync<T>(RequestObject requestObj)
@@ -32,7 +36,7 @@ namespace LivecoinWrapper
 
             var response = await httpClient.GetAsync(requestObj.Url).ConfigureAwait(false);
 
-            CheckException(response);
+            await EnsureSuccessStatusCodeAsync(response);
 
             return await UnpackingResponseAsync<T>(response);
         }
@@ -45,7 +49,7 @@ namespace LivecoinWrapper
                 new StringContent(requestObj.arguments.ToKeyValueString(),
                     Encoding.UTF8, "application/x-www-form-urlencoded")).ConfigureAwait(false);
 
-            CheckException(response);
+            await EnsureSuccessStatusCodeAsync(response);
 
             return await UnpackingResponseAsync<T>(response);
         }
@@ -56,12 +60,16 @@ namespace LivecoinWrapper
             return await Task.Run(() => JsonConvert.DeserializeObject<T>(json));
         }
 
-        private void CheckException(HttpResponseMessage responseMessage)
+        private async Task CheckExceptionAsync(HttpResponseMessage response)
         {
-            if (!responseMessage.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                var error = UnpackingResponseAsync<Error>(responseMessage).Result;
-                throw new LiveException(error.Message);
+                string content = await response.Content.ReadAsStringAsync();
+
+                if (response.Content != null)  response.Content.Dispose();
+
+                throw new LiveException($"{NewLine} StatusCode:   {(ushort)response.StatusCode},  {response.StatusCode.ToString()}" +
+                                        $"{NewLine} ErrorMessage: {content}");
             }
         }
 
