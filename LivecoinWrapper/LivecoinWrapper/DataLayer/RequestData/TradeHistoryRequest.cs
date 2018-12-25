@@ -15,7 +15,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
                 ["minutesOrHour"] = minOrHour.ToString()
             };
 
-            if (orderType != defoult) arguments.Add("type", orderType);
+            if (orderType != _defoult) arguments.Add("type", orderType);
 
             GenerateRequest(exchange_GET, "last_trades");
         }
