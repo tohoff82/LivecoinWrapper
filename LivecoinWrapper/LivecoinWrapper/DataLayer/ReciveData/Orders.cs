@@ -34,7 +34,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public ulong GoodUntilTime { get; private set; }
 
         [JsonProperty("type")]
-        public OrdType OrdType { get; private set; }
+        public string OrdType { get; private set; }
 
         [JsonProperty("orderStatus")]
         public OrdStatus OrdStatus { get; private set; }
