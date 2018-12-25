@@ -6,8 +6,8 @@ namespace LivecoinWrapper.DataLayer
 {
     public static class OrderType
     {
-        public const string defoult = "false";
-        public const string buy     = "BUY";
-        public const string sell    = "SELL";
+        public const string _defoult = "false";
+        public const string _buy     = "BUY";
+        public const string _sell    = "SELL";
     }
 }
