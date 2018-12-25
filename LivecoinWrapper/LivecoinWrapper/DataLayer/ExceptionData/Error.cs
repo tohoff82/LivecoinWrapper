@@ -8,10 +8,10 @@ namespace LivecoinWrapper.DataLayer.ExceptionData
     internal class Error
     {
         [JsonProperty("success")]
-        public ushort Success { get; set; }
+        public string Success { get; set; }
 
         [JsonProperty("errorCode")]
-        public ushort Code { get; set; }
+        public string Code { get; set; }
 
         [JsonProperty("errorMessage")]
         public string Message { get; set; }
