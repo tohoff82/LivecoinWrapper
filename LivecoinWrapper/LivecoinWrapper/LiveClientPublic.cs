@@ -28,7 +28,7 @@ namespace LivecoinWrapper
         /// <param name="minOrHour">Optional, if true - information is returned in the last minute, if false - last hour</param>
         /// <param name="orderType">Defoult - false, Possible values: BUY or SELL</param>
         /// <returns>List PublicTrade </returns>
-        public async Task<List<PublicTrade>> ReturnTradeHistoryAsync(string pairId, bool minOrHour = false, string orderType = defoult) =>
+        public async Task<List<PublicTrade>> ReturnTradeHistoryAsync(string pairId, bool minOrHour = false, string orderType = _defoult) =>
                 await HttpGetAsync<List<PublicTrade>>(new TradeHistoryRequest(pairId, minOrHour, orderType));
 
         /// <summary>
