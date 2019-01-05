@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using static LivecoinWrapper.DataLayer.OrderType;
+using static LivecoinWrapper.DataLayer.ServiceTypes;
 using static LivecoinWrapper.Helper.Enums.RequestType;
 
 namespace LivecoinWrapper.DataLayer.RequestData
