@@ -24,17 +24,6 @@
             closed_cashout      //Only input is allowed
         }
 
-        public enum OrdStatus
-        {
-            ALL,                //all orders
-            OPEN,               //open orders
-            CLOSED,             //closed orders
-            CANCELLED,          //cancelled orders
-            NOT_CANCELLED,      //all orders except canceled
-            PARTIALLY,          //partially executed orders
-            EXECUTED
-        }
-
         public enum BalanceType
         {
             total,                  //total balance
