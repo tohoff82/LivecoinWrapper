@@ -2,7 +2,6 @@
 
 using static System.Globalization.CultureInfo;
 using static System.Globalization.NumberStyles;
-using static LivecoinWrapper.Helper.Enums;
 
 namespace LivecoinWrapper.DataLayer.ReciveData
 {
@@ -12,7 +11,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public ulong Id { get; private set; }
 
         [JsonProperty("type")]
-        public TransactionsType Type { get; private set; }
+        public string Type { get; private set; }
 
         [JsonProperty("date")]
         public ulong Date { get; private set; }
