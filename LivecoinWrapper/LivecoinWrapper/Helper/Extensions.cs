@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 
-using static System.Web.HttpUtility;
+using static System.Net.WebUtility;
 
 namespace LivecoinWrapper.Helper
 {
