@@ -9,7 +9,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
     public class Balance
     {
         [JsonProperty("type")]
-        public BalanceType BalanceType { get; private set; }
+        public string BalanceType { get; private set; }
 
         [JsonProperty("currency")]
         public string CurrencyId { get; private set; }
