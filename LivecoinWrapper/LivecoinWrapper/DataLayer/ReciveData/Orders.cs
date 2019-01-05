@@ -16,7 +16,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public ushort StartRow { get; private set; }
 
         [JsonProperty("endRow")]
-        public ushort EndRow { get; private set; }
+        public short EndRow { get; private set; }
 
         [JsonProperty("data")]
         public List<Order> Data { get; private set; }
@@ -34,10 +34,10 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public ulong GoodUntilTime { get; private set; }
 
         [JsonProperty("type")]
-        public string OrdType { get; private set; }
+        public string OrderType { get; private set; }
 
         [JsonProperty("orderStatus")]
-        public OrdStatus OrdStatus { get; private set; }
+        public string OrderStatus { get; private set; }
 
         [JsonProperty("issueTime")]
         public ulong IssueTime { get; private set; }
