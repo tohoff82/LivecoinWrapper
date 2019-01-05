@@ -1,23 +1,15 @@
-﻿using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using LivecoinWrapper.DataLayer.ReciveData;
+﻿using LivecoinWrapper.DataLayer.ReciveData;
 using LivecoinWrapper.DataLayer.RequestData;
-using LivecoinWrapper.DataLayer;
 using System.Threading.Tasks;
-using System.Net.Http;
-using System.Text;
 using System.Collections.Generic;
-using System.Net;
-using System.IO;
-using LivecoinWrapper.DataLayer.ExceptionData;
+
 using static LivecoinWrapper.Helper.Enums;
-using static LivecoinWrapper.Helper.Enums.OrdStatus;
 using static LivecoinWrapper.Helper.Enums.TransactionsType;
+using static LivecoinWrapper.DataLayer.OrderStatus;
 
 namespace LivecoinWrapper
 {
-    public class LiveClientPrivate :LiveClient
+    public sealed class LiveClientPrivate :LiveClient
     {
         private readonly string apiSec;
 
@@ -26,6 +18,7 @@ namespace LivecoinWrapper
             this.apiSec = apiSec;
         }
 
+        #region User Private Data Methods
         /// <summary>
         /// Get information about his recent transactions, the result can be limited by the relevant parameters
         /// </summary>
@@ -43,15 +36,14 @@ namespace LivecoinWrapper
         /// Sampling in pairs should be done on your side
         /// </summary>
         /// <param name="pairId">The currency pair identifier. If not specified, all pairs will be returned.(Not working for a specific pair,  for API side)</param>
-        /// <param name="status">Order type (see enum OrdType)</param>
+        /// <param name="status">Order status (see OrderStatus)</param>
         /// <param name="issuedFrom">Sample start date (in UNIX Time format in milliseconds) -- not working for API side</param>
         /// <param name="issuedTo">Final sampling date (in UNIX Time format in milliseconds) -- not working for API side</param>
         /// <param name="startRow">The sequence number of the first entry Default value: 0</param>
         /// <param name="endRow">Sequence number of the last entry. The default value is 2147483646</param>
         /// <returns>Orders</returns>
-        public async Task<Orders> ReturnOrdersAsync(string pairId   = null, OrdStatus status = ALL, ulong? issuedFrom = null,
-                                                    ulong? issuedTo = null, uint startRow = 0,        uint endRow = 2147483646) =>
-                await HttpGetAsync<Orders>(new OrdersRequest(apiSec, pairId, status.ToString(), issuedFrom, issuedTo, startRow, endRow));
+        public async Task<Orders> ReturnOrdersAsync(string pairId = null, string status = _all, ulong? issuedFrom = null, ulong? issuedTo = null, uint startRow = 0, uint endRow = 2147483646) =>
+                await HttpGetAsync<Orders>(new OrdersRequest(apiSec, pairId, status, issuedFrom, issuedTo, startRow, endRow));
 
         /// <summary>
         /// Get information about the order by its ID
@@ -78,7 +70,7 @@ namespace LivecoinWrapper
         /// <param name="resLimit">Maximum number of results</param>
         /// <param name="offset">First record index</param>
         /// <returns>List of Transaction</returns>
-        public async Task<List<Transaction>> ReturnTransactionAsync(ulong startTime, ulong endTime, TransactionsType transType = all, ushort resLimit = 100, ushort offset = 0) =>
+        public async Task<List<Transaction>> ReturnTransactionsAsync(ulong startTime, ulong endTime, TransactionsType transType = all, ushort resLimit = 100, ushort offset = 0) =>
                 await HttpGetAsync<List<Transaction>>(new TransactionsRequest(apiSec, startTime, endTime, transType.ToString(), resLimit, offset));
 
         /// <summary>
@@ -88,5 +80,20 @@ namespace LivecoinWrapper
         /// <returns>FeeInfo</returns>
         public async Task<FeeInfo> ReturnFeeInfoAsync(bool info = true) =>
                 await HttpGetAsync<FeeInfo>(new FeeRequest(apiSec, info));
+        #endregion
+
+        #region Privae Create & Cancel Orders Methods
+
+        /// <summary>
+        /// Creating orders (buy, sell for limit & market)
+        /// </summary>
+        /// <param name="type">LIMIT_BUY, LIMIT_SELL, MARKET_BUY, MARKET_SELL</param>
+        /// <param name="pairId">The currency pair identifier</param>
+        /// <param name="quantity">quantity of base carrencie</param>
+        /// <param name="price">if OrdType - Market, price = 0</param>
+        /// <returns>PlaceOrder</returns>
+        public async Task<PlaceOrder> PlaceOrderAsync(string type, string pairId, decimal quantity, decimal price) =>
+                await HttpPostAsync<PlaceOrder>(new PlaceOrderRequest(apiSec, type, pairId, quantity, price));
+        #endregion
     }
 }
