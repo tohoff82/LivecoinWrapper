@@ -15,18 +15,17 @@ namespace LivecoinWrapper.DataLayer.RequestData
                 ["minutesOrHour"] = minOrHour.ToString()
             };
 
-            if (orderType != _defoult) arguments.Add("type", orderType);
+            if (orderType != _false) arguments.Add("type", orderType);
 
             GenerateRequest(exchange_GET, "last_trades");
         }
-
         public TradeHistoryRequest(string apiSec, string pairId, bool orderDesc, ushort limit, ushort offset) : base(apiSec)
         {
             arguments = new SortedDictionary<string, string>
             {
                 ["orderDesc"] = orderDesc.ToString(),
-                ["limit"]     = limit.ToString(),
-                ["offset"]    = offset.ToString()
+                ["offset"]    = offset.ToString(),
+                ["limit"]     = limit.ToString()
             };
 
             if (pairId != null) arguments.Add("currencyPair", pairId);
