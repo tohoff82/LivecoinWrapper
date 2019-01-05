@@ -8,7 +8,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
     public class Transaction
     {
         [JsonProperty("id")]
-        public ulong Id { get; private set; }
+        public string Id { get; private set; }
 
         [JsonProperty("type")]
         public string Type { get; private set; }
@@ -38,7 +38,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public string External { get; private set; }
 
         [JsonProperty("externalKey")]
-        public ulong ExternalKey { get; private set; }
+        public string ExternalKey { get; private set; }
 
         [JsonProperty("login")]
         public string Login { get; private set; }
