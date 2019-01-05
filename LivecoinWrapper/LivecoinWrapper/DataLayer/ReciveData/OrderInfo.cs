@@ -18,7 +18,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public string PairId { get; private set; }
 
         [JsonProperty("status")]
-        public OrdStatus OrdStatus { get; private set; }
+        public string OrdStatus { get; private set; }
 
         [JsonProperty("type")]
         public string OrdType { get; private set; }
