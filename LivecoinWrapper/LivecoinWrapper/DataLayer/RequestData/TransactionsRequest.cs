@@ -16,7 +16,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
                 ["offset"] = offset.ToString()
             };
 
-            if (transType != "all") arguments.Add("types", transType);
+            if (transType != "ALL") arguments.Add("types", transType);
 
             GenerateRequest(payment_GET, "history/transactions");
         }
