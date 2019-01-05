@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-using static LivecoinWrapper.Helper.Enums;
 using static System.Globalization.CultureInfo;
 using static System.Globalization.NumberStyles;
 
@@ -34,7 +33,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public string Symbol { get; private set; }
 
         [JsonProperty("walletStatus")]
-        public WalletStatus WalletStatus { get; private set; }
+        public string WalletStatus { get; private set; }
         
         private readonly decimal difficulty;
         public decimal Difficulty { get => difficulty; }
