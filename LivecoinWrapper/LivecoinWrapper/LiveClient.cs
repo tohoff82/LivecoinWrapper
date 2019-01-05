@@ -14,20 +14,22 @@ namespace LivecoinWrapper
     public abstract class LiveClient : IDisposable
     {
         private HttpClient httpClient;
-        private delegate Task Action(HttpResponseMessage response);
-        private Action EnsureSuccessStatusCodeAsync;
 
-        public LiveClient() { Initialize(); }
-        public LiveClient(string apiKey)
+        public LiveClient()
         {
-            Initialize();
-            httpClient.DefaultRequestHeaders.Add("Api-key", apiKey);
+            httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("https://api.livecoin.net")
+            };
         }
 
-        private void Initialize()
+        public LiveClient(string apiKey)
         {
-            httpClient = new HttpClient { BaseAddress = new Uri("https://api.livecoin.net") };
-            EnsureSuccessStatusCodeAsync = CheckExceptionAsync;
+            httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("https://api.livecoin.net")
+            };
+            httpClient.DefaultRequestHeaders.Add("Api-key", apiKey);
         }
 
         protected async Task<T> HttpGetAsync<T>(RequestObject requestObj)
@@ -60,7 +62,7 @@ namespace LivecoinWrapper
             return await Task.Run(() => JsonConvert.DeserializeObject<T>(json));
         }
 
-        private async Task CheckExceptionAsync(HttpResponseMessage response)
+        private async Task EnsureSuccessStatusCodeAsync(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)
             {
