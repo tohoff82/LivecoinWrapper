@@ -18,10 +18,10 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public string PairId { get; private set; }
 
         [JsonProperty("status")]
-        public string OrdStatus { get; private set; }
+        public string OrderStatus { get; private set; }
 
         [JsonProperty("type")]
-        public string OrdType { get; private set; }
+        public string OrderType { get; private set; }
 
         private readonly decimal price;
         public decimal Price { get => price; }
