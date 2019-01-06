@@ -1,11 +1,10 @@
-﻿using LivecoinWrapper.DataLayer.ReciveData;
-using LivecoinWrapper.DataLayer.RequestData;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
+using LivecoinWrapper.DataLayer.ReciveData;
+using LivecoinWrapper.DataLayer.RequestData;
 
-using static LivecoinWrapper.Helper.Enums;
-using static LivecoinWrapper.Helper.Enums.TransactionsType;
-using static LivecoinWrapper.DataLayer.OrderStatus;
+using static LivecoinWrapper.DataLayer.ServiceTypes;
+using static LivecoinWrapper.DataLayer.ServiceStatuses;
 
 namespace LivecoinWrapper
 {
@@ -36,7 +35,7 @@ namespace LivecoinWrapper
         /// Sampling in pairs should be done on your side
         /// </summary>
         /// <param name="pairId">The currency pair identifier. If not specified, all pairs will be returned.(Not working for a specific pair,  for API side)</param>
-        /// <param name="status">Order status (see OrderStatus)</param>
+        /// <param name="status">Order status. Possible values: _open, _closed, _cancel, _partial, _not_cancel</param>
         /// <param name="issuedFrom">Sample start date (in UNIX Time format in milliseconds) -- not working for API side</param>
         /// <param name="issuedTo">Final sampling date (in UNIX Time format in milliseconds) -- not working for API side</param>
         /// <param name="startRow">The sequence number of the first entry Default value: 0</param>
@@ -66,12 +65,12 @@ namespace LivecoinWrapper
         /// </summary>
         /// <param name="startTime">Required, sample start date (in UNIX Time format in milliseconds)</param>
         /// <param name="endTime">Required, sample end date (in UNIX Time format in milliseconds)</param>
-        /// <param name="transType">Types of transactions (Enums.TransactionsType)</param>
+        /// <param name="type">Types of transactions Possible values: _all, _buy, _sell, _deposit, _withdrawal</param>
         /// <param name="resLimit">Maximum number of results</param>
         /// <param name="offset">First record index</param>
         /// <returns>List of Transaction</returns>
-        public async Task<List<Transaction>> ReturnTransactionsAsync(ulong startTime, ulong endTime, TransactionsType transType = all, ushort resLimit = 100, ushort offset = 0) =>
-                await HttpGetAsync<List<Transaction>>(new TransactionsRequest(apiSec, startTime, endTime, transType.ToString(), resLimit, offset));
+        public async Task<List<Transaction>> ReturnTransactionsAsync(ulong startTime, ulong endTime, string type = _all, ushort resLimit = 100, ushort offset = 0) =>
+                await HttpGetAsync<List<Transaction>>(new TransactionsRequest(apiSec, startTime, endTime, type.ToString(), resLimit, offset));
 
         /// <summary>
         /// Returns the current user commission
