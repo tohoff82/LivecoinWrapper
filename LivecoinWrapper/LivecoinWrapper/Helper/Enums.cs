@@ -11,5 +11,11 @@
             payment_POST,
             info_GET
         }
+
+        public enum HttpType
+        {
+            get,
+            post
+        }
     }
 }
