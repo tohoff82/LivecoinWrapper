@@ -93,6 +93,15 @@ namespace LivecoinWrapper
         /// <returns>PlaceOrder</returns>
         public async Task<PlaceOrder> PlaceOrderAsync(string type, string pairId, decimal quantity, decimal price) =>
                 await HttpPostAsync<PlaceOrder>(new PlaceOrderRequest(apiSec, type, pairId, quantity, price));
+
+        /// <summary>
+        /// Cancel order
+        /// </summary>
+        /// <param name="pairId"> currency pair id </param>
+        /// <param name="orderId">order id </param>
+        /// <returns></returns>
+        public async Task<CancelOrder> CancelOrderAsync(string pairId, ulong orderId) =>
+                await HttpPostAsync<CancelOrder>(new CancelRequest(apiSec, pairId, orderId));
         #endregion
     }
 }
