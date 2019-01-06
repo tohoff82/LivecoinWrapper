@@ -17,7 +17,7 @@ namespace LivecoinWrapper
             this.apiSec = apiSec;
         }
 
-        #region User Private Data Methods
+        #region Data Methods
         /// <summary>
         /// Get information about his recent transactions, the result can be limited by the relevant parameters
         /// </summary>
@@ -81,7 +81,7 @@ namespace LivecoinWrapper
                 await HttpGetAsync<FeeInfo>(new FeeRequest(apiSec, info));
         #endregion
 
-        #region Privae Create & Cancel Orders Methods
+        #region Create & Cancel Order Methods
 
         /// <summary>
         /// Creating orders (buy, sell for limit & market)
@@ -102,6 +102,12 @@ namespace LivecoinWrapper
         /// <returns></returns>
         public async Task<CancelOrder> CancelOrderAsync(string pairId, ulong orderId) =>
                 await HttpPostAsync<CancelOrder>(new CancelRequest(apiSec, pairId, orderId));
+        #endregion
+
+        #region Payment Methods
+
+
+
         #endregion
     }
 }
