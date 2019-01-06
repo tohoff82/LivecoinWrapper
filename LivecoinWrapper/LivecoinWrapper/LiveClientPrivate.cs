@@ -49,7 +49,7 @@ namespace LivecoinWrapper
         /// </summary>
         /// <param name="orderId">The currency pair identifier</param>
         /// <returns>OrderInfo</returns>
-        public async Task<OrderInfo> ReturnOrderInfoById(ulong orderId) =>
+        public async Task<OrderInfo> ReturnOrderInfoByIdAsync(ulong orderId) =>
                 await HttpGetAsync<OrderInfo>(new OrderInfoRequest(apiSec, orderId));
 
         /// <summary>
@@ -106,7 +106,13 @@ namespace LivecoinWrapper
 
         #region Payment Methods
 
-
+        /// <summary>
+        /// Get the address of the wallet to replenish the balance of the selected cryptocurrency
+        /// </summary>
+        /// <param name="currencyId">Currency identificator</param>
+        /// <returns></returns>
+        public async Task<Wallet> ReturnWalletAddressAsync(string currencyId) =>
+                await HttpGetAsync<Wallet>(new WalletAddressRequest(apiSec, currencyId));
 
         #endregion
     }
