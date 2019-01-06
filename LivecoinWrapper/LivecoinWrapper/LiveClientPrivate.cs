@@ -26,7 +26,7 @@ namespace LivecoinWrapper
         /// <param name="limit">Number of elements per page</param>
         /// <param name="offset">Position of the first element on the page in the selection</param>
         /// <returns>List PrivateTrade</returns>
-        public async Task<List<PrivateTrade>> ReturnTradeHistoryAsync(string pairId = null, bool orderDesc = true, ushort limit = 100, ushort offset = 0) =>
+        public async Task<List<PrivateTrade>> ReturnTradeHistoryAsync(string pairId = null, bool orderDesc = true, ushort limit = _min, ushort offset = _o) =>
                 await HttpGetAsync<List<PrivateTrade>>(new TradeHistoryRequest(apiSec, pairId, orderDesc, limit, offset));
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace LivecoinWrapper
         /// <param name="startRow">The sequence number of the first entry Default value: 0</param>
         /// <param name="endRow">Sequence number of the last entry. The default value is 2147483646</param>
         /// <returns>Orders</returns>
-        public async Task<Orders> ReturnOrdersAsync(string pairId = null, string status = _all, ulong? issuedFrom = null, ulong? issuedTo = null, uint startRow = 0, uint endRow = 2147483646) =>
+        public async Task<Orders> ReturnOrdersAsync(string pairId = null, string status = _all, ulong? issuedFrom = null, ulong? issuedTo = null, uint startRow = _o, uint endRow = _max) =>
                 await HttpGetAsync<Orders>(new OrdersRequest(apiSec, pairId, status, issuedFrom, issuedTo, startRow, endRow));
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace LivecoinWrapper
         /// <param name="resLimit">Maximum number of results</param>
         /// <param name="offset">First record index</param>
         /// <returns>List of Transaction</returns>
-        public async Task<List<Transaction>> ReturnTransactionsAsync(ulong startTime, ulong endTime, string type = _all, ushort resLimit = 100, ushort offset = 0) =>
+        public async Task<List<Transaction>> ReturnTransactionsAsync(ulong startTime, ulong endTime, string type = _all, ushort resLimit = _min, ushort offset = _o) =>
                 await HttpGetAsync<List<Transaction>>(new TransactionsRequest(apiSec, startTime, endTime, type.ToString(), resLimit, offset));
 
         /// <summary>
@@ -89,9 +89,9 @@ namespace LivecoinWrapper
         /// <param name="type">LIMIT_BUY, LIMIT_SELL, MARKET_BUY, MARKET_SELL</param>
         /// <param name="pairId">The currency pair identifier</param>
         /// <param name="quantity">quantity of base carrencie</param>
-        /// <param name="price">if OrdType - Market, price = 0</param>
+        /// <param name="price">if Type - MARKET, price = 0</param>
         /// <returns>PlaceOrder</returns>
-        public async Task<PlaceOrder> PlaceOrderAsync(string type, string pairId, decimal quantity, decimal price) =>
+        public async Task<PlaceOrder> PlaceOrderAsync(string type, string pairId, decimal quantity, decimal? price = null) =>
                 await HttpPostAsync<PlaceOrder>(new PlaceOrderRequest(apiSec, type, pairId, quantity, price));
 
         /// <summary>
