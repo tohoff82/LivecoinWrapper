@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 
-using static LivecoinWrapper.Helper.Enums;
 using static System.Globalization.CultureInfo;
 using static System.Globalization.NumberStyles;
 
