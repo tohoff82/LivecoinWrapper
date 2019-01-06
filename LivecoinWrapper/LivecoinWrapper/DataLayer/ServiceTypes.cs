@@ -3,6 +3,10 @@
     public static class ServiceTypes
     {
         //----- Default Types ---------------------//
+        public const byte _o             = 0;
+        public const byte _min           = 100;
+        public const uint _max           = 2147483646;
+
         public const string _false       = "false";
         public const string _all         = "ALL";
 
