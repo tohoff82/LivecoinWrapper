@@ -6,6 +6,7 @@ using LivecoinWrapper.Helper;
 
 using static LivecoinWrapper.Helper.Enums;
 using static LivecoinWrapper.Helper.Enums.RequestType;
+using static LivecoinWrapper.Helper.Enums.HttpType;
 
 namespace LivecoinWrapper.DataLayer.RequestData
 {
@@ -25,27 +26,23 @@ namespace LivecoinWrapper.DataLayer.RequestData
         public RequestObject() { }
         public RequestObject(string apiSec) { this.apiSec = apiSec; }
 
-        protected void GenerateRequest(RequestType type, string method)
+        protected void GenerateRequest(RequestType type, string apiMethod)
         {
-            if (type == exchange_GET)      Request_GET(urlSegmentExchange, method, false);
-            if (type == exchangeAuth_GET)  Request_GET(urlSegmentExchange, method, true);
-            if (type == exchangeAuth_POST) Request_POST(urlSegmentExchange, method, true);
+            if (type == exchange_GET)      Request(GET,  urlSegmentExchange, apiMethod, false);
+            if (type == exchangeAuth_GET)  Request(GET,  urlSegmentExchange, apiMethod, true);
+            if (type == exchangeAuth_POST) Request(POST, urlSegmentExchange, apiMethod, true);
 
-            if (type == payment_GET)  Request_GET(urlSegmentPayment, method, true);
-            if (type == payment_POST) Request_POST(urlSegmentPayment, method, true);
+            if (type == payment_GET)  Request(GET,  urlSegmentPayment, apiMethod, true);
+            if (type == payment_POST) Request(POST, urlSegmentPayment, apiMethod, true);
 
-            if (type == info_GET) Url = new StringBuilder(urlSegmentInfo).Append(method).ToString();            
+            if (type == info_GET) Url = new StringBuilder(urlSegmentInfo).Append(apiMethod).ToString();            
         }
 
-        private void Request_GET(string urlSegment, string method, bool signature)
+        private void Request(HttpType type, string urlSegment, string method, bool signature)
         {
-            Url = new StringBuilder(urlSegment).AppendFormat("{0}?{1}", method, arguments.ToKeyValueString()).ToString();
             if (signature) CreateSignature();
-        }
-        private void Request_POST(string urlSegment, string method, bool signature)
-        {
-            Url = new StringBuilder(urlSegment).Append(method).ToString();
-            if (signature) CreateSignature();
+            if (type == POST) Url = new StringBuilder(urlSegment).Append(method).ToString();
+            if (type == GET)  Url = new StringBuilder(urlSegment).AppendFormat("{0}?{1}", method, arguments.ToKeyValueString()).ToString();
         }
 
         private void CreateSignature()
