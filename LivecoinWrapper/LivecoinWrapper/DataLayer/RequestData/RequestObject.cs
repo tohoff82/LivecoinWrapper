@@ -6,7 +6,6 @@ using LivecoinWrapper.Helper;
 
 using static LivecoinWrapper.Helper.Enums;
 using static LivecoinWrapper.Helper.Enums.RequestType;
-using System.Linq;
 
 namespace LivecoinWrapper.DataLayer.RequestData
 {
