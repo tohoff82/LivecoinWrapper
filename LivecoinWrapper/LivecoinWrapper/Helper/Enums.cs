@@ -14,8 +14,8 @@
 
         public enum HttpType
         {
-            get,
-            post
+            GET,
+            POST
         }
     }
 }
