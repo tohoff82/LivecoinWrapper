@@ -12,5 +12,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
 
         [JsonProperty("orderId")]
         public ulong OrderId { get; private set; }
+
+        [JsonProperty("exception")]
+        public string Exception { get; private set; }
     }
 }
