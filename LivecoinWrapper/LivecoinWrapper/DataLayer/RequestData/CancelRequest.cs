@@ -14,7 +14,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
                 ["orderId"] = orderId.ToString()
             };
 
-            GenerateRequest(exchangeAuth_GET, "cancellimit");
+            GenerateRequest(exchangeAuth_POST, "cancellimit");
         }
     }
 }
