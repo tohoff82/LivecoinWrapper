@@ -17,18 +17,11 @@ namespace LivecoinWrapper
 
         public LiveClient()
         {
-            httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("https://api.livecoin.net")
-            };
+            httpClient = new HttpClient { BaseAddress = new Uri("https://api.livecoin.net") };
         }
 
-        public LiveClient(string apiKey)
+        public LiveClient(string apiKey) : this()
         {
-            httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("https://api.livecoin.net")
-            };
             httpClient.DefaultRequestHeaders.Add("Api-key", apiKey);
         }
 
