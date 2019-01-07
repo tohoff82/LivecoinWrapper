@@ -49,7 +49,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         {
             decimal.TryParse(lst[0], Any, InvariantCulture, out rate);
             decimal.TryParse(lst[1], Any, InvariantCulture, out amount);
-            ulong.TryParse(lst[2], Any, InvariantCulture, out depthItemTime);
+            ulong.TryParse(lst[2],   Any, InvariantCulture, out depthItemTime);
         }
     }
 }
