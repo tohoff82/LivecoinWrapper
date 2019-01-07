@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using LivecoinWrapper.Helper;
@@ -18,6 +19,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
         private const string urlSegmentPayment  = "/payment/";
         private const string urlSegmentInfo     = "/info/";
 
+        internal IFormatProvider culture = CultureInfo.InvariantCulture;
         internal SortedDictionary<string, string> arguments;
 
         internal string Url { get; private set; }
