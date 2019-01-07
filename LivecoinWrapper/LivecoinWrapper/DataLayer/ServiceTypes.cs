@@ -3,7 +3,8 @@
     public static class ServiceTypes
     {
         //----- Default Types ---------------------//
-        public const byte _o             = 0;
+        public const byte _i_null        = 0;
+        public const decimal _d_null     = 0m;
         public const byte _min           = 100;
         public const uint _max           = 2147483646;
 
