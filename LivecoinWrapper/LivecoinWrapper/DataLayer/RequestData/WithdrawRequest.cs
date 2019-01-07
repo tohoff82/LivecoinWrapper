@@ -12,7 +12,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
             arguments = new SortedDictionary<string, string>
             {
                 ["currency"] = currencyId,
-                ["amount"]   = amount.ToString(),
+                ["amount"]   = amount.ToString(culture),
                 ["wallet"]   = memo == null ? address : new StringBuilder(address).AppendFormat("{0}::{1}", address, memo).ToString()
             };
 
