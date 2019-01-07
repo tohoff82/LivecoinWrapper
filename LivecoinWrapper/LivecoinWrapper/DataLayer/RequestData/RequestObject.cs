@@ -51,7 +51,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
             {
                 byte[] postBytes = Encoding.UTF8.GetBytes(arguments.ToKeyValueString());
                 
-                Sign = BitConverter.ToString(encryptor.ComputeHash(postBytes)).Replace("-", "");
+                Sign = BitConverter.ToString(encryptor.ComputeHash(postBytes)).Replace("-", string.Empty);
             }
         }
     }
