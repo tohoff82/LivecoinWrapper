@@ -12,7 +12,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public List<DepthItem> Bids = new List<DepthItem>();
 
         [JsonProperty("timestamp")]
-        public ulong Timestamp { get; set; }
+        public ulong Timestamp { get; private set; }
 
         [JsonProperty("asks")]
         private List<List<string>> ComingAsks
