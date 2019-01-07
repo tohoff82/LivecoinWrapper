@@ -114,6 +114,18 @@ namespace LivecoinWrapper
         public async Task<Wallet> ReturnWalletAddressAsync(string currencyId) =>
                 await HttpGetAsync<Wallet>(new WalletAddressRequest(apiSec, currencyId));
 
+        /// <summary>
+        /// Sends cryptocurrency withdrawal request
+        /// If successful, the request in the "fault" response field will be null, and in the "state" field - APPROVED or INPROCESS
+        /// </summary>
+        /// <param name="currencyId">Currency identificator</param>
+        /// <param name="amount">Amount of payment</param>
+        /// <param name="address">Wallet address for withdrawal</param>
+        /// <param name="memo">Additional Information : memo, PaymentID or Message (XLM, XRP, etc...)</param>
+        /// <returns>Withdraw object</returns>
+        public async Task<Withdraw> WithdrawAsync(string currencyId, decimal amount, string address, string memo = null) =>
+                await HttpPostAsync<Withdraw>(new WithdrawRequest(apiSec, currencyId, amount, address, memo));
+
         #endregion
     }
 }
