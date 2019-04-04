@@ -24,7 +24,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
 
         private void Generate(decimal price, string apiMethod)
         {
-            if(price != _d_null) arguments.Add("price", price.ToString(culture));
+            if(price != _d_null) arguments["price"] = price.ToString(culture));
             GenerateRequest(exchangeAuth_POST, apiMethod);
         }
     }
