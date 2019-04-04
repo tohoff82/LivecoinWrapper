@@ -1,14 +1,13 @@
-﻿using System.Threading.Tasks;
-using System.Collections.Generic;
-using LivecoinWrapper.DataLayer.ReciveData;
+﻿using LivecoinWrapper.DataLayer.ReciveData;
 using LivecoinWrapper.DataLayer.RequestData;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using static LivecoinWrapper.DataLayer.ServiceTypes;
-using static LivecoinWrapper.DataLayer.ServiceStatuses;
 
 namespace LivecoinWrapper
 {
-    public sealed class LiveClientPrivate :LiveClient
+    public sealed class LiveClientPrivate : LiveClient
     {
         private readonly string apiSec;
 
