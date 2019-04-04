@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>tohoff</Authors>
+    <Company>bizmaster</Company>
+    <Product>LivecoinApiLibrary</Product>
+    <Description>Api client for Livecoin exchange</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>LivecoinApiLibrary</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
