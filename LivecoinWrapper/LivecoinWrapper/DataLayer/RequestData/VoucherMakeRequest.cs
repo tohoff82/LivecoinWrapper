@@ -6,7 +6,7 @@ namespace LivecoinWrapper.DataLayer.RequestData
 {
     public class VoucherMakeRequest : RequestObject
     {
-        public VoucherMakeRequest(string apiSec, decimal amount, string currId, string description = null, string forUser = null) : base(apiSec)
+        public VoucherMakeRequest(string apiSec, decimal amount, string currId, string description, string forUser) : base(apiSec)
         {
             arguments = new SortedDictionary<string, string>
             {
