@@ -6,14 +6,15 @@ namespace LivecoinWrapper.DataLayer.RequestData
 {
     public class VoucherAmountRequest : RequestObject
     {
-        public VoucherAmountRequest(string apiSec, string voucherCode):base(apiSec)
+        public VoucherAmountRequest(string apiSec, string voucherCode, bool isRedeem):base(apiSec)
         {
             arguments = new SortedDictionary<string, string>
             {
                 ["voucher_code"] = voucherCode
             };
 
-            GenerateRequest(payment_POST, "voucher/amount");
+            if (isRedeem) GenerateRequest(payment_POST, "voucher/redeem");
+            else GenerateRequest(payment_POST, "voucher/amount");
         }
     }
 }
