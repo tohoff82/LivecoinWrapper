@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using LivecoinWrapper.DataLayer.ReciveData;
 using LivecoinWrapper.DataLayer.RequestData;
 
 namespace LivecoinWrapper
@@ -13,14 +14,30 @@ namespace LivecoinWrapper
         }
 
         /// <summary>
-        /// 
+        /// Issues a voucher
         /// </summary>
-        /// <param name="amount"></param>
-        /// <param name="currId"></param>
-        /// <param name="description"></param>
-        /// <param name="forUser"></param>
-        /// <returns></returns>
+        /// <param name="amount">quantity</param>
+        /// <param name="currId">name of currency</param>
+        /// <param name="description">description</param>
+        /// <param name="forUser">livecoin reciver</param>
+        /// <returns>voucher ode string</returns>
         public async Task<string> CreateVaucher(decimal amount, string currId, string description = null, string forUser = null) =>
             await VoucherPostAsync(new VoucherMakeRequest(apiSec, amount, currId, description, forUser));
+
+        /// <summary>
+        /// Returns the amount of the voucher by its code
+        /// </summary>
+        /// <param name="voucherCode">voucher code string</param>
+        /// <returns>amount</returns>
+        public async Task<string> GetVoucherAmount(string voucherCode) =>
+            await HttpPostAsync<string>(new VoucherAmountRequest(apiSec, voucherCode, isRedeem : false));
+
+        /// <summary>
+        /// Voucher redemption
+        /// </summary>
+        /// <param name="voucherCode">voucher code string</param>
+        /// <returns>Withdraw</returns>
+        public async Task<Withdraw> RedeemVaucher(string voucherCode) =>
+            await HttpPostAsync<Withdraw>(new VoucherAmountRequest(apiSec, voucherCode, isRedeem : true));
     }
 }
