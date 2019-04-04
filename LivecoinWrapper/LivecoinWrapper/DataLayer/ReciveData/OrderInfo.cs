@@ -2,7 +2,6 @@
 
 using static System.Globalization.CultureInfo;
 using static System.Globalization.NumberStyles;
-using static LivecoinWrapper.Helper.Enums;
 
 namespace LivecoinWrapper.DataLayer.ReciveData
 {
@@ -24,7 +23,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public string OrderType { get; private set; }
 
         private readonly decimal price;
-        public decimal Price { get => price; }
+        public decimal Price => price;
 
         private readonly decimal quantity;
         public decimal Quantity { get => quantity; }
