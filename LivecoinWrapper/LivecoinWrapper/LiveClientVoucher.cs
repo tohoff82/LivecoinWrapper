@@ -21,6 +21,6 @@ namespace LivecoinWrapper
         /// <param name="forUser"></param>
         /// <returns></returns>
         public async Task<string> CreateVaucher(decimal amount, string currId, string description = null, string forUser = null) =>
-            await HttpPostAsync<string>(new VoucherMakeRequest(apiSec, amount, currId, description, forUser));
+            await VoucherPostAsync(new VoucherMakeRequest(apiSec, amount, currId, description, forUser));
     }
 }
