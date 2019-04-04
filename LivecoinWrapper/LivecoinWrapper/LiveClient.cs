@@ -68,6 +68,19 @@ namespace LivecoinWrapper
             }
         }
 
+        protected async Task<string> VoucherPostAsync(RequestObject requestObj)
+        {
+            httpClient.DefaultRequestHeaders.Add("Sign", requestObj.Sign);
+
+            var response = await httpClient.PostAsync(requestObj.Url,
+                new StringContent(requestObj.arguments.ToKeyValueString(),
+                    Encoding.UTF8, "application/x-www-form-urlencoded")).ConfigureAwait(false);
+
+            await EnsureSuccessStatusCodeAsync(response);
+
+            return await response.Content.ReadAsStringAsync();
+        }
+
         public void Dispose() => httpClient.Dispose();
     }
 }
