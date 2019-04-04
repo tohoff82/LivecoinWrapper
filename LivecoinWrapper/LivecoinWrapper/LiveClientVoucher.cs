@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
+using LivecoinWrapper.DataLayer.RequestData;
 
 namespace LivecoinWrapper
 {
-    class LiveClientVoucher : LiveClient
+    public class LiveClientVoucher : LiveClient
     {
         private readonly string apiSec;
 
@@ -12,5 +11,16 @@ namespace LivecoinWrapper
         {
             this.apiSec = apiSec;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="currId"></param>
+        /// <param name="description"></param>
+        /// <param name="forUser"></param>
+        /// <returns></returns>
+        public async Task<string> CreateVaucher(decimal amount, string currId, string description = null, string forUser = null) =>
+            await HttpPostAsync<string>(new VoucherMakeRequest(apiSec, amount, currId, description, forUser));
     }
 }
