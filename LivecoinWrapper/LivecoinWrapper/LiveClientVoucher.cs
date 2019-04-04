@@ -21,7 +21,7 @@ namespace LivecoinWrapper
         /// <param name="description">description</param>
         /// <param name="forUser">livecoin reciver</param>
         /// <returns>voucher ode string</returns>
-        public async Task<string> CreateVaucher(decimal amount, string currId, string description = null, string forUser = null) =>
+        public async Task<string> CreateVaucherAsync(decimal amount, string currId, string description = null, string forUser = null) =>
             await VoucherPostAsync(new VoucherMakeRequest(apiSec, amount, currId, description, forUser));
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace LivecoinWrapper
         /// </summary>
         /// <param name="voucherCode">voucher code string</param>
         /// <returns>amount</returns>
-        public async Task<string> GetVoucherAmount(string voucherCode) =>
+        public async Task<string> GetVoucherAmountAsync(string voucherCode) =>
             await HttpPostAsync<string>(new VoucherAmountRequest(apiSec, voucherCode, isRedeem : false));
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace LivecoinWrapper
         /// </summary>
         /// <param name="voucherCode">voucher code string</param>
         /// <returns>Withdraw</returns>
-        public async Task<Withdraw> RedeemVaucher(string voucherCode) =>
+        public async Task<Withdraw> RedeemVaucherAsync(string voucherCode) =>
             await HttpPostAsync<Withdraw>(new VoucherAmountRequest(apiSec, voucherCode, isRedeem : true));
     }
 }
