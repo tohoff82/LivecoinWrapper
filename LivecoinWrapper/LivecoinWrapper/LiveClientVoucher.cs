@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using LivecoinWrapper.DataLayer.ReciveData;
 using LivecoinWrapper.DataLayer.RequestData;
 
@@ -21,8 +22,20 @@ namespace LivecoinWrapper
         /// <param name="description">description</param>
         /// <param name="forUser">livecoin reciver</param>
         /// <returns>voucher ode string</returns>
-        public async Task<string> CreateVaucherAsync(decimal amount, string currId, string description = null, string forUser = null) =>
-            await VoucherPostAsync(new VoucherMakeRequest(apiSec, amount, currId, description, forUser));
+        public async Task<Voucher> CreateVaucherAsync(decimal amount, string currId, string description = null, string forUser = null)
+        {
+            return new Voucher
+            {
+                VoucherId = Guid.NewGuid().ToString(),
+                ExchangeId = "lvc",
+                Code = await VoucherPostAsync(new VoucherMakeRequest(apiSec, amount, currId, description, forUser)),
+                CurrencyId = currId,
+                Amount = (float)amount,
+                CreatedDate = DateTimeOffset.Now.ToUnixTimeMilliseconds(),
+                Executed  = false
+            };
+        }
+            
 
         /// <summary>
         /// Returns the amount of the voucher by its code
