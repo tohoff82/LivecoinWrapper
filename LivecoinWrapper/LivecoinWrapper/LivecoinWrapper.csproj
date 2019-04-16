@@ -8,8 +8,9 @@
     <Description>Api client for Livecoin exchange</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>LivecoinApiLibrary</PackageId>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <Version>1.0.1</Version>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <Version>1.0.2</Version>
+    <FileVersion>1.0.2.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
