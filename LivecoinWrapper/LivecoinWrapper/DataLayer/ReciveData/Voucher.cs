@@ -28,18 +28,10 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         [JsonProperty("description")]
         public string Desription { get; set; }
 
-        [JsonProperty("comment")]
-        public string Comment { get; set; }
-
-        [JsonProperty("private_comment")]
-        public string PrivateComment { get; set; }
-
-        [JsonProperty("user_from")]
-        public string UserFrom { get; set; }
-
         [JsonProperty("user_for")]
         public string UserFor { get; set; }
 
-
+        [JsonProperty("withdraw")]
+        public Withdraw Withdraw { get; set; }
     }
 }
