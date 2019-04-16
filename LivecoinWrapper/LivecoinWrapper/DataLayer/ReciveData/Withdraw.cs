@@ -38,7 +38,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public string Description { get; private set; }
 
         [JsonProperty("amount")]
-        public string Amount { get; private set; }
+        public float Amount { get; private set; }
 
         [JsonProperty("currency")]
         public string Currency { get; private set; }
