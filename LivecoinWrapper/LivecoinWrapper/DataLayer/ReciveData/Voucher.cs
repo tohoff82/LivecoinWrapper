@@ -4,11 +4,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
 {
     public class Voucher
     {
-        [JsonProperty("voucher_id")]
-        public string VoucherId { get; set; }
-
-        [JsonProperty("exchange_id")]
-        public string ExchangeId { get; set; }
+        [JsonProperty("exchange_marker")]
+        public string ExchangeMarker { get; set; }
 
         [JsonProperty("voucher_code")]
         public string Code { get; set; }
@@ -25,8 +22,8 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         [JsonProperty("redeem_date")]
         public long RedeemDate { get; set; }
 
-        [JsonProperty("executed")]
-        public bool Executed { get; set; }
+        [JsonProperty("cashout")]
+        public bool Cashout { get; set; }
 
         [JsonProperty("description")]
         public string Desription { get; set; }
@@ -42,5 +39,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
 
         [JsonProperty("user_for")]
         public string UserFor { get; set; }
+
+
     }
 }
