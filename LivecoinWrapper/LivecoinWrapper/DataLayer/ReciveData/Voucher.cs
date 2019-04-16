@@ -31,7 +31,7 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         [JsonProperty("user_for")]
         public string UserFor { get; set; }
 
-        [JsonProperty("withdraw")]
-        public Withdraw Withdraw { get; set; }
+        [JsonProperty("external_withdraw_id")]
+        public string ExternalWithdrawId { get; private set; }
     }
 }
