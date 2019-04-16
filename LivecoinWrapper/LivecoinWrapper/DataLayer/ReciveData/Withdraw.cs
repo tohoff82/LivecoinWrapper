@@ -4,6 +4,9 @@ namespace LivecoinWrapper.DataLayer.ReciveData
 {
     public class Withdraw
     {
+        [JsonProperty("external_withdraw_id")]
+        public string ExternalWithdrawId { get; private set; }
+
         [JsonProperty("fault")]
         public string Fault { get; private set; }
 
