@@ -26,14 +26,14 @@ namespace LivecoinWrapper
         {
             return new Voucher
             {
+                Cashout  = false,
                 UserFor = forUser,
-                ExchangeMarker = "lvc",
-                Desription = description,
-                Code = await VoucherPostAsync(new VoucherMakeRequest(apiSec, amount, currId, description, forUser)),
-                CreatedDate = DateTimeOffset.Now.ToUnixTimeMilliseconds(),
-                Amount = (float)amount,
                 CurrencyId = currId,
-                Cashout  = false
+                ExchangeMarker = "lvc",
+                Amount = (float)amount,
+                Desription = description,
+                CreatedDate = DateTimeOffset.Now.ToUnixTimeMilliseconds(),
+                Code = await VoucherPostAsync(new VoucherMakeRequest(apiSec, amount, currId, description, forUser))
             };
         }
             
