@@ -8,22 +8,22 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public string Fault { get; private set; }
 
         [JsonProperty("userId")]
-        public string UserId { get; private set; }
+        public long UserId { get; private set; }
 
         [JsonProperty("userName")]
         public string UserName { get; private set; }
 
         [JsonProperty("id")]
-        public string WithdrawId { get; private set; }
+        public long WithdrawId { get; private set; }
 
         [JsonProperty("state")]
         public string State { get; private set; }
 
         [JsonProperty("createDate")]
-        public string CreateDate { get; private set; }
+        public long CreateDate { get; private set; }
 
         [JsonProperty("lastModifyDate")]
-        public string LastModifyDate { get; private set; }
+        public long LastModifyDate { get; private set; }
 
         [JsonProperty("verificationType")]
         public string VerificationType { get; private set; }
@@ -47,16 +47,16 @@ namespace LivecoinWrapper.DataLayer.ReciveData
         public string AcountTo { get; private set; }
 
         [JsonProperty("acceptDate")]
-        public string AcceptDate { get; private set; }
+        public long AcceptDate { get; private set; }
 
         [JsonProperty("valueDate")]
-        public string ValueDate { get; private set; }
+        public long ValueDate { get; private set; }
 
         [JsonProperty("docDate")]
-        public string DocDate { get; private set; }
+        public long DocDate { get; private set; }
 
         [JsonProperty("docNumber")]
-        public string DocNumber { get; private set; }
+        public long DocNumber { get; private set; }
 
         [JsonProperty("correspondentDetails")]
         public string CorrespondentDetails { get; private set; }
